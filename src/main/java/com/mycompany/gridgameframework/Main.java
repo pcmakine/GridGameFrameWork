@@ -7,6 +7,7 @@ package com.mycompany.gridgameframework;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -48,11 +49,12 @@ Reflections reflections = new Reflections(new ConfigurationBuilder()
                 test(obj);
             }
         }
+        
+        Board board = new Board(2, 3);
+        System.out.println(board);
     }
     
     public static void test(Class<?> clazz) throws NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
-       Constructor<?> ctor = clazz.getConstructor(int.class);
-        SingleGame game = (SingleGame) ctor.newInstance( 3 );
-        game.hello();
+
     }
 }

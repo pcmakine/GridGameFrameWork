@@ -4,22 +4,23 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>216</x>
-      <y>88</y>
-      <w>152</w>
-      <h>152</h>
+      <x>360</x>
+      <y>120</y>
+      <w>176</w>
+      <h>184</h>
     </coordinates>
     <panel_attributes>Game
 --
 -board: Board
--winningRule: Rule
--gameOverRules: Rule
--turnChangeRule: Rule //optional
--playedTurns: int
+-rules: List&lt;Rules&gt;
+-turnChangeRule: Rule
 -name: String
--gameTime: long
--startTime: TimeStamp
+-stats: GameStats
 --
++startGame(): void
++pauseGame(): void
++setName(name: String): boolean
++newTurn(): void
 
 </panel_attributes>
     <additional_attributes/>
@@ -27,10 +28,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>448</x>
-      <y>88</y>
-      <w>128</w>
-      <h>152</h>
+      <x>616</x>
+      <y>120</y>
+      <w>208</w>
+      <h>184</h>
     </coordinates>
     <panel_attributes>Board
 --
@@ -38,6 +39,12 @@
 -height :int
 -squares[][] :Square
 --
+#init(): void
+#initContent(square: Square): void
++getWidht(): int
++getHeight(): int
++getSquares(): Square[][]
++getSquareAt(x: int, y: int): Square
 
 </panel_attributes>
     <additional_attributes/>
@@ -45,8 +52,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>360</x>
-      <y>152</y>
+      <x>528</x>
+      <y>200</y>
       <w>104</w>
       <h>32</h>
     </coordinates>
@@ -58,16 +65,64 @@ m2=1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
+      <x>560</x>
+      <y>384</y>
+      <w>208</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>Square&lt;E, T&gt;
+--
+-content: String
+-numOfChanges: int
+-tip: E
+#x: int
+#y: int
+#errors :String
+--
++getContent(): String
++setContent(content: String): boolean
++getNumOfChanges(): int
++getTip(): E
++setTip(tip: E): void
+#getX(): int
+#getY(): int
+#setError(): void
+#validateInput(input: String): boolean
+
+
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
       <x>672</x>
-      <y>96</y>
-      <w>128</w>
+      <y>296</y>
+      <w>40</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+m1=2..*
+m2=1</panel_attributes>
+    <additional_attributes>10.0;110.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>296</x>
+      <y>432</y>
+      <w>184</w>
       <h>152</h>
     </coordinates>
-    <panel_attributes>Square&lt;E&gt;
+    <panel_attributes>&lt;&lt;abstract class&gt;&gt;
+Rule
 --
--content :String
--numOfChanges :int
--Tip :E
++check(): boolean
++onSuccessfullCheck(): void
++onUnSuccessfullCheck(): void
 --
 
 </panel_attributes>
@@ -76,98 +131,51 @@ m2=1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>568</x>
-      <y>152</y>
-      <w>120</w>
-      <h>32</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-
-m1=2..*
-m2=1</panel_attributes>
-    <additional_attributes>130.0;10.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>216</x>
-      <y>312</y>
-      <w>128</w>
+      <x>416</x>
+      <y>296</y>
+      <w>40</w>
       <h>152</h>
     </coordinates>
-    <panel_attributes>&lt;&lt;interface&gt;&gt;
-Rule
---
-+check(): boolean
---
-
-</panel_attributes>
-    <additional_attributes/>
+    <panel_attributes>lt=&lt;-
+m2=1
+m1=2..*</panel_attributes>
+    <additional_attributes>10.0;170.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>72</x>
-      <y>504</y>
-      <w>128</w>
-      <h>152</h>
+      <y>120</y>
+      <w>232</w>
+      <h>184</h>
     </coordinates>
-    <panel_attributes>WinningRule
+    <panel_attributes>&lt;&lt;abstract class&gt;&gt;
+GameStats
 --
-+check()
+-gameTime: long
+-startTime: Date
+-playedTurns: int
 --
-
++GameStats(startTime: Date): GameStats
++getGameTime(): long
++getStartTime(): TimeStamp
++getPlayedTurns(): int
++setPlayedTurns(turns: int): void
++calculatePoints() :int
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>128</x>
-      <y>456</y>
-      <w>160</w>
-      <h>64</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>180.0;10.0;10.0;60.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>328</x>
-      <y>504</y>
-      <w>128</w>
-      <h>152</h>
-    </coordinates>
-    <panel_attributes>GameOverRule
---
-+check()
---
-
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>272</x>
-      <y>456</y>
-      <w>136</w>
-      <h>64</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;150.0;60.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>272</x>
-      <y>232</y>
-      <w>40</w>
-      <h>96</h>
+      <x>296</x>
+      <y>200</y>
+      <w>80</w>
+      <h>32</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=1
-m2=2..3</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
+m2=1</panel_attributes>
+    <additional_attributes>10.0;10.0;80.0;10.0</additional_attributes>
   </element>
 </diagram>
