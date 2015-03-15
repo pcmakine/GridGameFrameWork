@@ -6,6 +6,7 @@
 package com.mycompany.gridgameframework;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -17,7 +18,7 @@ public class Square<E, T> {
     private E tip;
     protected int x;
     protected int y;
-    protected ArrayList<String> errors;
+    protected List<String> errors;
     
     public Square(int x, int y){
         this.x = x;
@@ -30,7 +31,7 @@ public class Square<E, T> {
     }
 
     public boolean setContent(String content) {
-        boolean valid = validateInput(content);
+        boolean valid = InputValidator.validateInput(this, content);
         if(valid){
             this.content = content;
         }
@@ -57,16 +58,12 @@ public class Square<E, T> {
         return y;
     }
 
-    public ArrayList<String> getErrors() {
+    public List<String> getErrors() {
         return errors;
     }
 
-    protected void setError(ArrayList<String> errors) {
+    protected void setError(List<String> errors) {
         this.errors = errors;
-    }
-    
-    protected boolean validateInput(String input){
-        return true;
     }
   
 }

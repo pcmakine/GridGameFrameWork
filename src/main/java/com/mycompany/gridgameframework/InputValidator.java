@@ -6,32 +6,22 @@
 package com.mycompany.gridgameframework;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author Pete
  */
-public class InputValidator {
-    
-    public boolean validateInput(Square square, String input){
-        boolean isValid = isValid(square, input);
-        if(isValid){
-            setErrors(square, true);
-        }else{
-            setErrors(square, false);
-        }
-        return isValid;
-    }
-    
-    protected boolean isValid(Square square, String input){
-        return true;
-    }
-    
-    protected void setErrors(Square square, boolean valid){
-        ArrayList<String> errors = new ArrayList();
-        if(!valid){
-            errors.add("Invalid input");
-        }
+public abstract class InputValidator {
+
+    public static boolean validateInput(Square square, String input) {
+        List<String> errors = isValid(square, input);
         square.setError(errors);
+        
+        return errors.isEmpty();
+    }
+
+    protected static List<String> isValid(Square square, String input) {
+        return new ArrayList();
     }
 }

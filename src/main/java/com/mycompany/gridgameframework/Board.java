@@ -5,6 +5,8 @@
  */
 package com.mycompany.gridgameframework;
 
+import java.util.List;
+
 /**
  *
  * @author Pete
@@ -40,7 +42,10 @@ public class Board {
         return squares;
     }
 
-    public Square getSquareAt(int x, int y) {
+    public Square getSquareAt(int x, int y) throws IllegalArgumentException {
+        if(!coordsOnBoard(x, y)){
+            throw new IllegalArgumentException();
+        }
         return squares[y][x];
     }
 
@@ -50,6 +55,16 @@ public class Board {
 
     public int getHeight() {
         return height;
+    }
+
+    public boolean setUserInputAt(int x, int y, String input) {
+        Square square = getSquareAt(x, y);
+        square.setContent(input);
+        return square.getErrors().isEmpty();
+    }
+
+    private boolean coordsOnBoard(int x, int y) {
+        return x >= 0 && y >= 0 && x <= width && y <= height;
     }
 
     @Override

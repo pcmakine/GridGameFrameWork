@@ -36,5 +36,9 @@ public abstract class GameStats {
         this.playedTurns = playedTurns;
     }
     
+    public void startNextTurn(){
+        playedTurns++;
+    }
+    
     public abstract int  calculatePoints();
 }
