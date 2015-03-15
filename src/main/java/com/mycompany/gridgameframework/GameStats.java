@@ -12,20 +12,25 @@ import java.util.Date;
  * @author Pete
  */
 public abstract class GameStats {
-    long gameTime;
-    Date startTime;
-    int playedTurns;
+    protected long gameTime;
+    private Date sessionStartTime;
+    private Date endTime;
+    protected int playedTurns;
     
     public GameStats(Date startTime){
-        this.startTime = startTime;
+        this.sessionStartTime = startTime;
     }
 
-    public long getGameTime() {
-        return gameTime;
+    public long getGameTimeInSeconds(boolean running) {
+        if(running){
+            return gameTime/1000 + sessionDuration();
+        }else{
+            return gameTime/1000;
+        }
     }
 
     public Date getStartTime() {
-        return startTime;
+        return sessionStartTime;
     }
     
     public int getPlayedTurns() {
@@ -40,5 +45,13 @@ public abstract class GameStats {
         playedTurns++;
     }
     
+    public void pauseGame(){
+        gameTime = gameTime + sessionDuration();
+    }
+    
     public abstract int  calculatePoints();
+
+    public long sessionDuration() {
+        return (new Date().getTime() - sessionStartTime.getTime())/1000;
+    }
 }

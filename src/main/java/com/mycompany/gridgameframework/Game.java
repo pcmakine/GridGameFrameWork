@@ -20,6 +20,8 @@ public class Game implements UserInteractionObserver{
     private String name;
     private GameStats stats;
     private InputValidator validator;
+    private boolean gameOver;
+    private boolean paused;
     
     public Game(String name, int gridWidth, int gridHeight){
         this.name = name;
@@ -37,5 +39,17 @@ public class Game implements UserInteractionObserver{
         for(Rule rule: rules){
             rule.check(this);
         }
+    }
+    
+    public void endGame(){
+        gameOver = true;
+    }
+    
+    public boolean isPaused(){
+        return paused;
+    }
+    
+    public void pauseGame(){
+        paused = true;
     }
 }

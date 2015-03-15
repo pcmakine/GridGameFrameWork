@@ -19,6 +19,7 @@ public class ConfigLoader {
         Properties properties = new Properties();
         try {
             properties.load(new FileInputStream("src/main/java/com/mycompany/gridgameframework/configs.txt"));
+           // properties.load(new FileInputStream("configs.txt")); //production version
         } catch (IOException e) {
             System.out.println("error in loading the config file");
         }
