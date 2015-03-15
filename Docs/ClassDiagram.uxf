@@ -4,7 +4,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>280</x>
+      <x>287</x>
       <y>154</y>
       <w>175</w>
       <h>203</h>
@@ -34,7 +34,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>504</x>
+      <x>511</x>
       <y>154</y>
       <w>182</w>
       <h>161</h>
@@ -61,7 +61,7 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>448</x>
+      <x>455</x>
       <y>217</y>
       <w>70</w>
       <h>28</h>
@@ -74,7 +74,7 @@ m2=1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>518</x>
+      <x>525</x>
       <y>371</y>
       <w>182</w>
       <h>210</h>
@@ -107,7 +107,7 @@ m2=1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>245</x>
+      <x>252</x>
       <y>413</y>
       <w>161</w>
       <h>133</h>
@@ -126,7 +126,7 @@ Rule
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>350</x>
+      <x>357</x>
       <y>350</y>
       <w>35</w>
       <h>77</h>
@@ -139,7 +139,7 @@ m1=2..*</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>28</x>
+      <x>35</x>
       <y>154</y>
       <w>203</w>
       <h>196</h>
@@ -169,7 +169,7 @@ GameStats
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>224</x>
+      <x>231</x>
       <y>224</y>
       <w>70</w>
       <h>28</h>
@@ -182,7 +182,7 @@ m2=1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>770</x>
+      <x>777</x>
       <y>413</y>
       <w>245</w>
       <h>133</h>
@@ -199,7 +199,7 @@ InputValidator
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>602</x>
+      <x>609</x>
       <y>308</y>
       <w>35</w>
       <h>77</h>
@@ -213,7 +213,7 @@ m2=4..*
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>693</x>
+      <x>700</x>
       <y>448</y>
       <w>91</w>
       <h>28</h>
@@ -225,7 +225,7 @@ m2=4..*
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>217</x>
+      <x>224</x>
       <y>56</y>
       <w>259</w>
       <h>70</h>
@@ -240,7 +240,7 @@ UserInteractionObserver
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>343</x>
+      <x>350</x>
       <y>119</y>
       <w>21</w>
       <h>49</h>
@@ -251,7 +251,7 @@ UserInteractionObserver
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>105</x>
+      <x>112</x>
       <y>343</y>
       <w>21</w>
       <h>56</h>
@@ -262,7 +262,7 @@ UserInteractionObserver
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>14</x>
+      <x>21</x>
       <y>385</y>
       <w>203</w>
       <h>56</h>
@@ -276,7 +276,7 @@ UserInteractionObserver
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>238</x>
+      <x>245</x>
       <y>574</y>
       <w>161</w>
       <h>63</h>
@@ -290,7 +290,7 @@ UserInteractionObserver
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>308</x>
+      <x>315</x>
       <y>539</y>
       <w>21</w>
       <h>49</h>
