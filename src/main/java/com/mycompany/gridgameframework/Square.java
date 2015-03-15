@@ -29,8 +29,12 @@ public class Square<E, T> {
         return content;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public boolean setContent(String content) {
+        boolean valid = validateInput(content);
+        if(valid){
+            this.content = content;
+        }
+        return valid;
     }
 
     public int getNumOfChanges() {

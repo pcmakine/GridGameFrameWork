@@ -21,8 +21,8 @@ public class Board {
         squares = new Square[height][width];
         init();
     }
-    
-    private void init(){
+
+    private void init() {
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 Square square = new Square(x, y);
@@ -31,30 +31,29 @@ public class Board {
             }
         }
     }
-    
-    protected void initContent(Square square){
-        
+
+    protected void initContent(Square square) {
+
     }
-    
-    public Square[][] getSquares(){
+
+    public Square[][] getSquares() {
         return squares;
     }
-    
-    public Square getSquareAt(int x, int y){
+
+    public Square getSquareAt(int x, int y) {
         return squares[y][x];
     }
-        
-    public int getWidth(){
+
+    public int getWidth() {
         return width;
     }
-    
-    public int getHeight(){
+
+    public int getHeight() {
         return height;
     }
-    
-    
+
     @Override
-    public String toString(){
+    public String toString() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
