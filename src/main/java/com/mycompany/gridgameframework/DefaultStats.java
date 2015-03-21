@@ -5,6 +5,7 @@
  */
 package com.mycompany.gridgameframework;
 
+import com.mycompany.gridgameframework.GameStats;
 import java.util.Date;
 
 /**
@@ -19,7 +20,7 @@ public class DefaultStats extends GameStats{
     
     @Override
     public int calculatePoints() {
-        return 0;
+        return 55;
     }
     
 }

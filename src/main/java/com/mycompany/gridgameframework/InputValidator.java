@@ -14,14 +14,14 @@ import java.util.List;
  */
 public abstract class InputValidator {
 
-    public static boolean validateInput(Square square, String input) {
+    public boolean validateInput(Square square, String input) {
         List<String> errors = isValid(square, input);
         square.setError(errors);
         
         return errors.isEmpty();
     }
 
-    protected static List<String> isValid(Square square, String input) {
+    protected List<String> isValid(Square square, String input) {
         return new ArrayList();
     }
 }
