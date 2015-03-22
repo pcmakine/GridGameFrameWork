@@ -15,6 +15,7 @@ public class ConfigKeys {
     public static final String TURN_CHANGE_RULE = "turn_change_rule";
     public static final String RULES = "rules";
     public static final String BOARD = "board";
+    public static final String POINTS_CALCULATOR = "points_calculator";
     public static final String GRID_WIDTH = "width";
     public static final String GRID_HEIGHT = "height";
 }

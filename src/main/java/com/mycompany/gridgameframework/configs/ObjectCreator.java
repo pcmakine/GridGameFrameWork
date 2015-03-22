@@ -9,6 +9,7 @@ import com.mycompany.gridgameframework.Board;
 import com.mycompany.gridgameframework.DefaultTurnChangeRule;
 import com.mycompany.gridgameframework.GameStats;
 import com.mycompany.gridgameframework.InputValidator;
+import com.mycompany.gridgameframework.PointsCalculator;
 import com.mycompany.gridgameframework.Rule;
 import com.mycompany.gridgameframework.configs.ConfigKeys;
 import java.lang.reflect.Constructor;
@@ -33,8 +34,22 @@ public class ObjectCreator {
         this.properties = properties;
     }
 
-    public GameStats createGameStats() throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        return (GameStats) getConstructor(properties.getProperty(ConfigKeys.GAMESTATS), Date.class).newInstance(new Date());
+    public GameStats createGameStats() {
+        try {
+            return (GameStats) getConstructor(properties.getProperty(ConfigKeys.GAMESTATS), Date.class).newInstance(new Date());
+        } catch (Exception ex) {
+            Logger.getLogger(ObjectCreator.class.getName()).log(Level.INFO, "no custom game stats found, using the default class", ex);
+        }
+        return new GameStats(new Date());
+    }
+
+    public PointsCalculator createPointsCalculator() {
+        try {
+            return (PointsCalculator) getConstructor(properties.getProperty(ConfigKeys.POINTS_CALCULATOR)).newInstance();
+        } catch (Exception ex) {
+            Logger.getLogger(ObjectCreator.class.getName()).log(Level.INFO, "No points calculator found. Points will not be calculated", ex);
+            return null;
+        } 
     }
 
     public InputValidator createInputValidator() {
@@ -43,7 +58,7 @@ public class ObjectCreator {
             return (InputValidator) getConstructor(properties.getProperty(ConfigKeys.INPUTVALIDATOR)).newInstance();
         } catch (Exception ex) {
             return null;
-        } 
+        }
     }
 
     public Rule createTurnChangeRule() {
@@ -53,14 +68,18 @@ public class ObjectCreator {
         } catch (Exception ex) {
             Logger.getLogger(ObjectCreator.class.getName()).log(Level.INFO, noCustomRuleMsg, ex);
             return new DefaultTurnChangeRule();
-        } 
+        }
     }
 
-    public List<Rule> createRules() throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+    public List<Rule> createRules() {
         List<String> ruleClasses = Arrays.asList(properties.getProperty(ConfigKeys.RULES).split(","));
         List<Rule> rules = new ArrayList();
         for (String className : ruleClasses) {
-            rules.add((Rule) getConstructor(className).newInstance());
+            try {
+                rules.add((Rule) getConstructor(className).newInstance());
+            } catch (Exception ex) {
+                Logger.getLogger(ObjectCreator.class.getName()).log(Level.SEVERE, "Unexpected error in creating rules", ex);
+            } 
         }
         return rules;
     }
@@ -70,7 +89,7 @@ public class ObjectCreator {
             return (Board) getConstructor(properties.getProperty(ConfigKeys.BOARD), int.class, int.class).newInstance(ConfigLoader.getGridWidth(), ConfigLoader.getGridHeight());
         } catch (Exception ex) {
             return new Board(ConfigLoader.getGridWidth(), ConfigLoader.getGridHeight());
-        } 
+        }
     }
 
     private Constructor getConstructor(String className, Class... params) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {

@@ -30,31 +30,11 @@ public class Game implements UserInteractionObserver {
     private boolean started;
 
     private Game() {
-    /*    try {
-            this.board = new Board(ConfigLoader.getGridWidth(), ConfigLoader.getGridHeight());
-            ObjectCreator creator = new ObjectCreator(ConfigLoader.getProperties());
-            this.turnChangeRule = creator.createTurnChangeRule();
-            this.rules = creator.createRules();
-            this.stats = creator.createGameStats();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-            System.exit(1);
-        } catch (NoSuchMethodException ex) {
-            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-            System.exit(1);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-            System.exit(1);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-            System.exit(1);
-        } catch (IllegalArgumentException ex) {
-            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-            System.exit(1);
-        } catch (InvocationTargetException ex) {
-            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-            System.exit(1);
-        }*/
+        ObjectCreator creator = new ObjectCreator(ConfigLoader.getProperties());
+        this.board = creator.createBoard();
+        this.turnChangeRule = creator.createTurnChangeRule();
+        this.rules = creator.createRules();
+        this.stats = creator.createGameStats();
     }
 
     public static Game getGame() {

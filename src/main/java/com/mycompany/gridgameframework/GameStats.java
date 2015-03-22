@@ -5,24 +5,33 @@
  */
 package com.mycompany.gridgameframework;
 
+import com.mycompany.gridgameframework.configs.ConfigLoader;
+import com.mycompany.gridgameframework.configs.ObjectCreator;
 import java.util.Date;
 
 /**
  *
  * @author Pete
  */
-public abstract class GameStats {
+public class GameStats {
 
     protected long gameTime;
-    private Date sessionStartTime;
-    private Date endTime;
+    protected Date sessionStartTime;
+    protected Date endTime;
     protected int playedTurns;
+    protected PointsCalculator pointsCalc;
 
     public GameStats(Date startTime) {
         this.sessionStartTime = startTime;
+        this.pointsCalc = new ObjectCreator(ConfigLoader.getProperties()).createPointsCalculator();
     }
-
-    public abstract int calculatePoints();
+    
+    public int calculatePoints(){
+        if(pointsCalc != null){
+            return pointsCalc.calculatePoints(this);
+        }
+        return 0;
+    }
 
     public void pauseGame() {
         updateGameTime();
@@ -35,7 +44,7 @@ public abstract class GameStats {
         sessionStartTime = null;
     }
 
-    private void updateGameTime() {
+    protected void updateGameTime() {
         gameTime = gameTime + sessionDuration();
     }
 
