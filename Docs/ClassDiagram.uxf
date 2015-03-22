@@ -4,8 +4,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>483</x>
-      <y>161</y>
+      <x>301</x>
+      <y>154</y>
       <w>294</w>
       <h>266</h>
     </coordinates>
@@ -14,7 +14,6 @@
 _-INSTANCE: Game_
 -board: Board
 -rules: List&lt;Rules&gt;
--turnChangeRule: Rule
 -name: String
 -stats: GameStats
 -paused: boolean
@@ -32,16 +31,17 @@ _+getGame(): Game_
 +endGame(): void
 +setName(name: String): boolean
 +getName(): String
++getBoard(): Board
 -checkRules(inputValid: boolean): void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>910</x>
-      <y>161</y>
+      <x>728</x>
+      <y>154</y>
       <w>231</w>
-      <h>161</h>
+      <h>182</h>
     </coordinates>
     <panel_attributes>Board
 --
@@ -58,6 +58,8 @@ _+getGame(): Game_
 +getSquareAt(x: int, y: int): Square
 +setUserInputAt(x: int, y: int, input: String): boolean
 -coordsOnBoard(x: int, y: int): boolean
++isFilled(): boolean
++toString(): String
 
 
 </panel_attributes>
@@ -66,8 +68,8 @@ _+getGame(): Game_
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>770</x>
-      <y>224</y>
+      <x>588</x>
+      <y>217</y>
       <w>154</w>
       <h>28</h>
     </coordinates>
@@ -79,8 +81,8 @@ m2=1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>924</x>
-      <y>378</y>
+      <x>742</x>
+      <y>392</y>
       <w>182</w>
       <h>210</h>
     </coordinates>
@@ -113,8 +115,8 @@ m2=1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>378</x>
-      <y>490</y>
+      <x>196</x>
+      <y>469</y>
       <w>245</w>
       <h>77</h>
     </coordinates>
@@ -132,21 +134,21 @@ Rule
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>490</x>
-      <y>420</y>
+      <x>308</x>
+      <y>413</y>
       <w>35</w>
-      <h>84</h>
+      <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m2=1
 m1=2..*</panel_attributes>
-    <additional_attributes>10.0;100.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>175</x>
-      <y>161</y>
+      <x>0</x>
+      <y>154</y>
       <w>259</w>
       <h>224</h>
     </coordinates>
@@ -177,23 +179,23 @@ m1=2..*</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>427</x>
-      <y>224</y>
-      <w>70</w>
+      <x>252</x>
+      <y>217</y>
+      <w>63</w>
       <h>28</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=1
 m2=1</panel_attributes>
-    <additional_attributes>10.0;10.0;80.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;70.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1162</x>
-      <y>210</y>
+      <x>980</x>
+      <y>189</y>
       <w>245</w>
-      <h>133</h>
+      <h>126</h>
     </coordinates>
     <panel_attributes>&lt;&lt;abstract class&gt;&gt;
 InputValidator
@@ -207,8 +209,8 @@ InputValidator
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1008</x>
-      <y>315</y>
+      <x>826</x>
+      <y>329</y>
       <w>35</w>
       <h>77</h>
     </coordinates>
@@ -221,8 +223,8 @@ m2=4..*
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1099</x>
-      <y>483</y>
+      <x>917</x>
+      <y>434</y>
       <w>77</w>
       <h>28</h>
     </coordinates>
@@ -233,8 +235,8 @@ m2=4..*
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>497</x>
-      <y>42</y>
+      <x>315</x>
+      <y>21</y>
       <w>259</w>
       <h>70</h>
     </coordinates>
@@ -248,19 +250,19 @@ UserInteractionObserver
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>623</x>
-      <y>105</y>
+      <x>441</x>
+      <y>84</y>
       <w>21</w>
-      <h>70</h>
+      <h>84</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>637</x>
-      <y>490</y>
+      <x>455</x>
+      <y>469</y>
       <w>245</w>
       <h>119</h>
     </coordinates>
@@ -281,20 +283,20 @@ UserInteractionObserver
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>756</x>
-      <y>56</y>
-      <w>133</w>
-      <h>119</h>
+      <x>588</x>
+      <y>63</y>
+      <w>119</w>
+      <h>133</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;use&gt;&gt;</panel_attributes>
-    <additional_attributes>170.0;20.0;10.0;20.0;10.0;150.0</additional_attributes>
+    <additional_attributes>150.0;10.0;100.0;10.0;100.0;170.0;10.0;170.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>875</x>
-      <y>7</y>
+      <x>693</x>
+      <y>0</y>
       <w>203</w>
       <h>119</h>
     </coordinates>
@@ -314,20 +316,20 @@ _getProperties(): Properties_
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>742</x>
-      <y>420</y>
+      <x>560</x>
+      <y>413</y>
       <w>42</w>
-      <h>84</h>
+      <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;use&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;100.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1162</x>
-      <y>441</y>
+      <x>980</x>
+      <y>392</y>
       <w>245</w>
       <h>133</h>
     </coordinates>
@@ -345,33 +347,33 @@ _+getService(): ValidatorService()_
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1281</x>
-      <y>336</y>
+      <x>1099</x>
+      <y>308</y>
       <w>21</w>
-      <h>119</h>
+      <h>98</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=1
 m2=1</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;150.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;120.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>490</x>
-      <y>560</y>
-      <w>21</w>
-      <h>56</h>
+      <x>133</x>
+      <y>539</y>
+      <w>140</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+    <additional_attributes>180.0;10.0;10.0;70.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>378</x>
-      <y>602</y>
-      <w>245</w>
+      <x>77</x>
+      <y>588</y>
+      <w>154</w>
       <h>35</h>
     </coordinates>
     <panel_attributes>DefaultTurnChangeRule
@@ -384,16 +386,55 @@ m2=1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>175</x>
-      <y>42</y>
-      <w>259</w>
+      <x>49</x>
+      <y>21</y>
+      <w>189</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 PointsCalculator
 --
-+calculatePoints
++calculatePoints(stats: GameStats): int
 </panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>126</x>
+      <y>84</y>
+      <w>21</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>287</x>
+      <y>588</y>
+      <w>154</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>DefaultEndGameRule
+--
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>252</x>
+      <y>539</y>
+      <w>126</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;160.0;70.0</additional_attributes>
   </element>
 </diagram>

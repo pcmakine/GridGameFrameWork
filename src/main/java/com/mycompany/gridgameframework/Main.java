@@ -22,7 +22,8 @@ import java.util.Properties;
 public class Main {
     
     public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        List list =  Arrays.asList(ConfigLoader.getProperties().getProperty("rules").split(","));
+
+        List list = Arrays.asList(ConfigLoader.getProperties().getProperty("rules").split(","));
         System.out.println(list);
         Board board = new Board(2, 3);
         System.out.println(board);

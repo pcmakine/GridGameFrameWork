@@ -22,7 +22,6 @@ public class Game implements UserInteractionObserver {
     private static final Game INSTANCE = new Game();
     private Board board;
     private List<Rule> rules;
-    private Rule turnChangeRule;
     private String name;
     private GameStats stats;
     private boolean paused;
@@ -30,11 +29,10 @@ public class Game implements UserInteractionObserver {
     private boolean started;
 
     private Game() {
-        ObjectCreator creator = new ObjectCreator(ConfigLoader.getProperties());
+     /*   ObjectCreator creator = new ObjectCreator(ConfigLoader.getProperties());
         this.board = creator.createBoard();
-        this.turnChangeRule = creator.createTurnChangeRule();
         this.rules = creator.createRules();
-        this.stats = creator.createGameStats();
+        this.stats = creator.createGameStats();*/
     }
 
     public static Game getGame() {
@@ -72,11 +70,15 @@ public class Game implements UserInteractionObserver {
     }
 
     public void setName(String name) {
-        name = name;
+        this.name = name;
     }
 
     public String getName() {
         return name;
+    }
+    
+    public Board getBoard(){
+        return board;
     }
 
     @Override
@@ -91,13 +93,6 @@ public class Game implements UserInteractionObserver {
                 rule.onSuccessfullCheck(this);
             } else {
                 rule.onUnSuccessfullCheck(this);
-            }
-        }
-        if (turnChangeRule != null) {
-            if (turnChangeRule.check(this, inputValid)) {
-                turnChangeRule.onSuccessfullCheck(this);
-            } else {
-                turnChangeRule.onUnSuccessfullCheck(this);
             }
         }
     }

@@ -34,9 +34,7 @@ public class Board {
         }
     }
 
-    protected void initContent(Square square) {
-
-    }
+    protected void initContent(Square square){};
 
     public Square[][] getSquares() {
         return squares;
@@ -65,6 +63,17 @@ public class Board {
 
     private boolean coordsOnBoard(int x, int y) {
         return x >= 0 && y >= 0 && x <= width && y <= height;
+    }
+    
+    public boolean isFilled(){
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                if(getSquareAt(j, i).getContent().isEmpty()){
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     @Override
