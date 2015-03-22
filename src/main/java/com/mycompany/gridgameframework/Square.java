@@ -31,7 +31,11 @@ public class Square<E, T> {
     }
 
     public boolean setContent(String content) {
-        boolean valid = ValidatorService.getService().validateInput(this, content);
+        InputValidator validator = ValidatorService.getService().getValidator();
+        boolean valid = true;
+        if(validator != null){
+            valid = validator.validateInput(this, content);
+        }
         if(valid){
             this.content = content;
         }

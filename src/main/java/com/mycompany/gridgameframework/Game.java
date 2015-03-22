@@ -5,14 +5,21 @@
  */
 package com.mycompany.gridgameframework;
 
+import com.mycompany.gridgameframework.configs.ObjectCreator;
+import com.mycompany.gridgameframework.configs.ConfigLoader;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Pete
  */
 public class Game implements UserInteractionObserver {
+
+    private static final Game INSTANCE = new Game();
     private Board board;
     private List<Rule> rules;
     private Rule turnChangeRule;
@@ -22,9 +29,36 @@ public class Game implements UserInteractionObserver {
     private boolean gameOver;
     private boolean started;
 
-    public Game(String name, int gridWidth, int gridHeight) {
-        this.name = name;
-        this.board = new Board(gridWidth, gridHeight);
+    private Game() {
+    /*    try {
+            this.board = new Board(ConfigLoader.getGridWidth(), ConfigLoader.getGridHeight());
+            ObjectCreator creator = new ObjectCreator(ConfigLoader.getProperties());
+            this.turnChangeRule = creator.createTurnChangeRule();
+            this.rules = creator.createRules();
+            this.stats = creator.createGameStats();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+            System.exit(1);
+        } catch (NoSuchMethodException ex) {
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+            System.exit(1);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+            System.exit(1);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+            System.exit(1);
+        } catch (IllegalArgumentException ex) {
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+            System.exit(1);
+        } catch (InvocationTargetException ex) {
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+            System.exit(1);
+        }*/
+    }
+
+    public static Game getGame() {
+        return INSTANCE;
     }
 
     public boolean isStarted() {
@@ -33,7 +67,6 @@ public class Game implements UserInteractionObserver {
 
     public void startGame() {
         started = true;
-        //this.stats = new GameStats(new Date());
     }
 
     public boolean isPaused() {
@@ -57,24 +90,36 @@ public class Game implements UserInteractionObserver {
         stats.endGame(new Date());
         gameOver = true;
     }
-    
-    public void setName(String name){
+
+    public void setName(String name) {
         name = name;
     }
-    
-    public String getName(){
+
+    public String getName() {
         return name;
     }
 
     @Override
     public void onUserInteraction(int x, int y, String input) {
         boolean validInput = board.setUserInputAt(x, y, input);
+        checkRules(validInput);
+    }
 
+    private void checkRules(boolean inputValid) {
         for (Rule rule : rules) {
-            rule.check(this);
+            if (rule.check(this, inputValid)) {
+                rule.onSuccessfullCheck(this);
+            } else {
+                rule.onUnSuccessfullCheck(this);
+            }
         }
         if (turnChangeRule != null) {
-            turnChangeRule.check(this);
+            if (turnChangeRule.check(this, inputValid)) {
+                turnChangeRule.onSuccessfullCheck(this);
+            } else {
+                turnChangeRule.onUnSuccessfullCheck(this);
+            }
         }
     }
+
 }

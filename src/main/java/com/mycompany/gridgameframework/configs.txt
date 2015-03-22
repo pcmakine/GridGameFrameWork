@@ -1,3 +1,0 @@
-validator = com.mycompany.gridgameframework.DefaultValidator
-gamestats = com.mycompany.gridgameframework.DefaultStats
-rules = a, b, c

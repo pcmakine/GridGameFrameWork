@@ -5,6 +5,8 @@
  */
 package com.mycompany.gridgameframework;
 
+import com.mycompany.gridgameframework.configs.ObjectCreator;
+import com.mycompany.gridgameframework.configs.ConfigLoader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.logging.Level;
@@ -20,35 +22,16 @@ public class ValidatorService {
     private InputValidator validator;
 
     private ValidatorService() {
-        try {
-            this.validator = new ObjectCreator(ConfigLoader.getProperties()).createInputValidator();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ValidatorService.class.getName()).log(Level.SEVERE, null, ex);
-            System.exit(1);
-        } catch (NoSuchMethodException ex) {
-            Logger.getLogger(ValidatorService.class.getName()).log(Level.SEVERE, null, ex);
-            System.exit(1);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(ValidatorService.class.getName()).log(Level.SEVERE, null, ex);
-            System.exit(1);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(ValidatorService.class.getName()).log(Level.SEVERE, null, ex);
-            System.exit(1);
-        } catch (IllegalArgumentException ex) {
-            Logger.getLogger(ValidatorService.class.getName()).log(Level.SEVERE, null, ex);
-            System.exit(1);
-        } catch (InvocationTargetException ex) {
-            Logger.getLogger(ValidatorService.class.getName()).log(Level.SEVERE, null, ex);
-            System.exit(1);
-        }
+        this.validator = new ObjectCreator(ConfigLoader.getProperties()).createInputValidator();
+
     }
 
     public static ValidatorService getService() {
         return INSTANCE;
     }
 
-    public boolean validateInput(Square square, String input) {
-        return validator.validateInput(square, input);
+    public InputValidator getValidator() {
+        return validator;
     }
 
 }

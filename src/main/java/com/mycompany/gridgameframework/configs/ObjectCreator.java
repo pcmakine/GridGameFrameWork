@@ -3,8 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.gridgameframework;
+package com.mycompany.gridgameframework.configs;
 
+import com.mycompany.gridgameframework.Board;
+import com.mycompany.gridgameframework.DefaultTurnChangeRule;
+import com.mycompany.gridgameframework.GameStats;
+import com.mycompany.gridgameframework.InputValidator;
+import com.mycompany.gridgameframework.Rule;
+import com.mycompany.gridgameframework.configs.ConfigKeys;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -31,21 +37,40 @@ public class ObjectCreator {
         return (GameStats) getConstructor(properties.getProperty(ConfigKeys.GAMESTATS), Date.class).newInstance(new Date());
     }
 
-    public InputValidator createInputValidator() throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        return (InputValidator) getConstructor(properties.getProperty(ConfigKeys.INPUTVALIDATOR)).newInstance();
+    public InputValidator createInputValidator() {
+        String noValidatorMsg = "No custom validator class found. All inputs will be accepted.";
+        try {
+            return (InputValidator) getConstructor(properties.getProperty(ConfigKeys.INPUTVALIDATOR)).newInstance();
+        } catch (Exception ex) {
+            return null;
+        } 
     }
 
-    public Rule createTurnChangeRule() throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        return (Rule) getConstructor(properties.getProperty(ConfigKeys.TURN_CHANGE_RULE)).newInstance();
+    public Rule createTurnChangeRule() {
+        String noCustomRuleMsg = "No custom turn change rule foudn. Using the default rule";
+        try {
+            return (Rule) getConstructor(properties.getProperty(ConfigKeys.TURN_CHANGE_RULE)).newInstance();
+        } catch (Exception ex) {
+            Logger.getLogger(ObjectCreator.class.getName()).log(Level.INFO, noCustomRuleMsg, ex);
+            return new DefaultTurnChangeRule();
+        } 
     }
 
     public List<Rule> createRules() throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         List<String> ruleClasses = Arrays.asList(properties.getProperty(ConfigKeys.RULES).split(","));
         List<Rule> rules = new ArrayList();
-        for(String className : ruleClasses){
+        for (String className : ruleClasses) {
             rules.add((Rule) getConstructor(className).newInstance());
         }
         return rules;
+    }
+
+    public Board createBoard() {
+        try {
+            return (Board) getConstructor(properties.getProperty(ConfigKeys.BOARD), int.class, int.class).newInstance(ConfigLoader.getGridWidth(), ConfigLoader.getGridHeight());
+        } catch (Exception ex) {
+            return new Board(ConfigLoader.getGridWidth(), ConfigLoader.getGridHeight());
+        } 
     }
 
     private Constructor getConstructor(String className, Class... params) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {

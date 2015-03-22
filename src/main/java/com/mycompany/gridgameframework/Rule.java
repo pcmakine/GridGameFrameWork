@@ -10,8 +10,8 @@ package com.mycompany.gridgameframework;
  * @author Pete
  */
 public abstract class Rule {
-    public abstract boolean check(Game game);
-    public abstract void onSuccessfullCheck();
-    public abstract void onUnSuccessfullCheck();
+    public abstract boolean check(Game game, boolean inputValid);
+    public abstract void onSuccessfullCheck(Game game);
+    public abstract void onUnSuccessfullCheck(Game game);
     
 }
