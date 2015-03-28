@@ -6,6 +6,7 @@
 package com.mycompany.gridgameframework;
 
 import com.mycompany.gridgameframework.configs.ConfigLoader;
+import com.mycompany.gridgameframework.gui.DefaultGui;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
@@ -25,7 +26,15 @@ public class Main {
 
         List list = Arrays.asList(ConfigLoader.getProperties().getProperty("rules").split(","));
         System.out.println(list);
-        Board board = new Board(2, 3);
+        Board board = new Board(10, 10);
         System.out.println(board);
+        
+        final DefaultGui gui = new DefaultGui(board.getWidth(), board.getHeight());
+        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                gui.init();
+            }
+        });
     }
 }

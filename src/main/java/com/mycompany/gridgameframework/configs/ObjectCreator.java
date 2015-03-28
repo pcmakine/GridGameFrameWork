@@ -95,7 +95,16 @@ public class ObjectCreator {
         try {
             return (Board) getConstructor(properties.getProperty(ConfigKeys.BOARD), int.class, int.class).newInstance(ConfigLoader.getGridWidth(), ConfigLoader.getGridHeight());
         } catch (Exception ex) {
-            return new Board(ConfigLoader.getGridWidth(), ConfigLoader.getGridHeight());
+            try{
+                return new Board(ConfigLoader.getGridWidth(), ConfigLoader.getGridHeight());
+            }catch(Exception e){
+                Logger.getLogger(ObjectCreator.class.getName()).log(
+                        Level.SEVERE, "Could not find the board dimensions in the configs file, creating "
+                                + "a board with default dimensions: width: " + Board.DEFAULT_WIDTH + 
+                                ", height: " + Board.DEFAULT_HEIGHT, ex);
+                return new Board(Board.DEFAULT_WIDTH, Board.DEFAULT_HEIGHT);
+            }
+            
         }
     }
 

@@ -12,7 +12,9 @@ import java.util.List;
  * @author Pete
  */
 public class Board {
-
+    public static int DEFAULT_WIDTH = 10;
+    public static int DEFAULT_HEIGHT = 10;
+    
     private int width;
     private int height;
     private Square[][] squares;
