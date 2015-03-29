@@ -17,12 +17,12 @@ public class Board {
     
     private int width;
     private int height;
-    private Square[][] squares;
+    private BoardComponent[][] squares;
 
     public Board(int width, int height) {
         this.width = width;
         this.height = height;
-        squares = new Square[height][width];
+        squares = new BoardComponent[height][width];
         init();
     }
 
@@ -38,11 +38,11 @@ public class Board {
 
     protected void initContent(Square square){};
 
-    public Square[][] getSquares() {
+    public BoardComponent[][] getSquares() {
         return squares;
     }
 
-    public Square getSquareAt(int x, int y) throws IllegalArgumentException {
+    public BoardComponent getSquareAt(int x, int y) throws IllegalArgumentException {
         if(!coordsOnBoard(x, y)){
             throw new IllegalArgumentException();
         }
@@ -58,7 +58,7 @@ public class Board {
     }
 
     public boolean setUserInputAt(int x, int y, String input) {
-        Square square = getSquareAt(x, y);
+        BoardComponent square = getSquareAt(x, y);
         square.setContent(input);
         return square.getErrors().isEmpty();
     }
@@ -83,7 +83,7 @@ public class Board {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                sb.append("[" + getSquareAt(j, i).x + ", " + getSquareAt(j, i).y + "]");
+                sb.append("[" + getSquareAt(j, i).getX() + ", " + getSquareAt(j, i).getY() + "]");
             }
             sb.append("\n");
         }

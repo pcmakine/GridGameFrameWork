@@ -7,11 +7,8 @@ package com.mycompany.gridgameframework;
 
 import com.mycompany.gridgameframework.configs.ObjectCreator;
 import com.mycompany.gridgameframework.configs.ConfigLoader;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -19,7 +16,7 @@ import java.util.logging.Logger;
  */
 public class Game implements UserInteractionObserver {
 
-    private static final Game INSTANCE = new Game();
+    private static Game INSTANCE = new Game();
     private Board board;
     private List<Rule> rules;
     private String name;
@@ -29,10 +26,10 @@ public class Game implements UserInteractionObserver {
     private boolean started;
 
     private Game() {
-     /*   ObjectCreator creator = new ObjectCreator(ConfigLoader.getProperties());
+        ObjectCreator creator = new ObjectCreator(ConfigLoader.getProperties());
         this.board = creator.createBoard();
         this.rules = creator.createRules();
-        this.stats = creator.createGameStats();*/
+        this.stats = creator.createGameStats();
     }
 
     public static Game getGame() {
@@ -76,8 +73,8 @@ public class Game implements UserInteractionObserver {
     public String getName() {
         return name;
     }
-    
-    public Board getBoard(){
+
+    public Board getBoard() {
         return board;
     }
 

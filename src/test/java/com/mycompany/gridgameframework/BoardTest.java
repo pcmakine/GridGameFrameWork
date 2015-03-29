@@ -40,7 +40,7 @@ public class BoardTest {
     @Test
     public void initSetsX2Y1Correctly(){
         Board board = new Board(3, 3);
-        Square square = board.getSquareAt(0, 2);
+        BoardComponent square = board.getSquareAt(0, 2);
         assertEquals(0, square.getX());
         assertEquals(2, square.getY());
     }

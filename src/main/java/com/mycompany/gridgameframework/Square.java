@@ -12,10 +12,10 @@ import java.util.List;
  *
  * @author Pete
  */
-public class Square<E, T> {
+public class Square<E> implements BoardComponent<E> {
     private String content;
     private int numOfChanges;
-    private E tip;
+    private E hint;
     protected int x;
     protected int y;
     protected List<String> errors;
@@ -26,10 +26,12 @@ public class Square<E, T> {
         this.errors = new ArrayList();
     }
 
+    @Override
     public String getContent() {
         return content;
     }
 
+    @Override
     public boolean setContent(String content) {
         InputValidator validator = ValidatorService.getService().getValidator();
         boolean valid = true;
@@ -42,26 +44,32 @@ public class Square<E, T> {
         return valid;
     }
 
+    @Override
     public int getNumOfChanges() {
         return numOfChanges;
     }
 
-    public E getTip() {
-        return tip;
+    @Override
+    public E getHint() {
+        return hint;
     }
 
-    public void setTip(E tip) {
-        this.tip = tip;
+    @Override
+    public void setHint(E hint) {
+        this.hint = hint;
     }
 
+    @Override
     public int getX() {
         return x;
     }
 
+    @Override
     public int getY() {
         return y;
     }
 
+    @Override
     public List<String> getErrors() {
         return errors;
     }

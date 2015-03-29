@@ -4,7 +4,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>301</x>
+      <x>371</x>
       <y>154</y>
       <w>294</w>
       <h>266</h>
@@ -38,7 +38,7 @@ _+getGame(): Game_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>728</x>
+      <x>798</x>
       <y>154</y>
       <w>231</w>
       <h>182</h>
@@ -47,7 +47,7 @@ _+getGame(): Game_
 --
 -width :int
 -height :int
--squares[][] :Square
+-squares[][] :BoardComponent
 --
 + &lt;&lt;constructor&gt;&gt; Board(width: int, height: int)
 -init(): void
@@ -68,7 +68,7 @@ _+getGame(): Game_
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>588</x>
+      <x>658</x>
       <y>217</y>
       <w>154</w>
       <h>28</h>
@@ -81,26 +81,19 @@ m2=1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>742</x>
+      <x>812</x>
       <y>392</y>
-      <w>182</w>
-      <h>210</h>
+      <w>189</w>
+      <h>133</h>
     </coordinates>
-    <panel_attributes>Square&lt;E, T&gt;
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+BoardComponent&lt;E&gt;
 --
--content: String
--numOfChanges: int
--tip: E
-#x: int
-#y: int
-#errors :String
---
-+&lt;&lt;constructor&gt;&gt; Square(x: int, y: int)
 +getContent(): String
 +setContent(content: String): boolean
 +getNumOfChanges(): int
-+getTip(): E
-+setTip(tip: E): void
++getHint(): E
++setHint(hint: E): void
 #getX(): int
 #getY(): int
 #setError(): void
@@ -115,7 +108,7 @@ m2=1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>196</x>
+      <x>84</x>
       <y>469</y>
       <w>245</w>
       <h>77</h>
@@ -134,20 +127,20 @@ Rule
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>308</x>
-      <y>413</y>
-      <w>35</w>
-      <h>70</h>
+      <x>287</x>
+      <y>399</y>
+      <w>98</w>
+      <h>84</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m2=1
 m1=2..*</panel_attributes>
-    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;100.0;10.0;10.0;120.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>0</x>
+      <x>70</x>
       <y>154</y>
       <w>259</w>
       <h>224</h>
@@ -179,7 +172,7 @@ m1=2..*</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>252</x>
+      <x>322</x>
       <y>217</y>
       <w>63</w>
       <h>28</h>
@@ -192,8 +185,8 @@ m2=1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>980</x>
-      <y>189</y>
+      <x>1064</x>
+      <y>392</y>
       <w>245</w>
       <h>126</h>
     </coordinates>
@@ -209,7 +202,7 @@ InputValidator
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>826</x>
+      <x>896</x>
       <y>329</y>
       <w>35</w>
       <h>77</h>
@@ -223,19 +216,19 @@ m2=4..*
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>917</x>
-      <y>434</y>
-      <w>77</w>
+      <x>994</x>
+      <y>609</y>
+      <w>84</w>
       <h>28</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;use&gt;&gt;</panel_attributes>
-    <additional_attributes>90.0;20.0;10.0;20.0</additional_attributes>
+    <additional_attributes>100.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>315</x>
+      <x>385</x>
       <y>21</y>
       <w>259</w>
       <h>70</h>
@@ -250,7 +243,7 @@ UserInteractionObserver
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>441</x>
+      <x>511</x>
       <y>84</y>
       <w>21</w>
       <h>84</h>
@@ -261,9 +254,9 @@ UserInteractionObserver
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>455</x>
-      <y>469</y>
-      <w>245</w>
+      <x>525</x>
+      <y>483</y>
+      <w>252</w>
       <h>119</h>
     </coordinates>
     <panel_attributes>ObjectCreator
@@ -275,29 +268,18 @@ UserInteractionObserver
 +createInputValidator(): InputValidator
 +createTurnChangeRule(): Rule
 +createRules(): List&lt;Rule&gt;
++createBoardComponent(x: int, y: int): BoardComponent
 -getConstructor(): Constructor
 
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>588</x>
-      <y>63</y>
-      <w>119</w>
-      <h>133</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;.
-&lt;&lt;use&gt;&gt;</panel_attributes>
-    <additional_attributes>150.0;10.0;100.0;10.0;100.0;170.0;10.0;170.0</additional_attributes>
-  </element>
-  <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>693</x>
+      <x>819</x>
       <y>0</y>
-      <w>203</w>
+      <w>161</w>
       <h>119</h>
     </coordinates>
     <panel_attributes>ConfigLoader
@@ -316,20 +298,20 @@ _getProperties(): Properties_
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>560</x>
+      <x>630</x>
       <y>413</y>
       <w>42</w>
-      <h>70</h>
+      <h>84</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;use&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;100.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>980</x>
-      <y>392</y>
+      <x>1064</x>
+      <y>574</y>
       <w>245</w>
       <h>133</h>
     </coordinates>
@@ -347,32 +329,32 @@ _+getService(): ValidatorService()_
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1099</x>
-      <y>308</y>
+      <x>1183</x>
+      <y>511</y>
       <w>21</w>
-      <h>98</h>
+      <h>77</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=1
 m2=1</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;120.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>133</x>
+      <x>56</x>
       <y>539</y>
-      <w>140</w>
-      <h>63</h>
+      <w>105</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>180.0;10.0;10.0;70.0</additional_attributes>
+    <additional_attributes>130.0;10.0;10.0;80.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>77</x>
-      <y>588</y>
+      <x>0</x>
+      <y>595</y>
       <w>154</w>
       <h>35</h>
     </coordinates>
@@ -386,7 +368,7 @@ m2=1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>49</x>
+      <x>119</x>
       <y>21</y>
       <w>189</w>
       <h>70</h>
@@ -401,7 +383,7 @@ PointsCalculator
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>126</x>
+      <x>196</x>
       <y>84</y>
       <w>21</w>
       <h>84</h>
@@ -414,8 +396,8 @@ m2=1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>287</x>
-      <y>588</y>
+      <x>189</x>
+      <y>595</y>
       <w>154</w>
       <h>35</h>
     </coordinates>
@@ -429,12 +411,93 @@ m2=1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>252</x>
+      <x>140</x>
       <y>539</y>
-      <w>126</w>
-      <h>63</h>
+      <w>140</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;160.0;70.0</additional_attributes>
+    <additional_attributes>10.0;10.0;180.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>812</x>
+      <y>574</y>
+      <w>189</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>Square&lt;E&gt;
+--
+-content: String
+-numOfChanges: int
+-hint: E
+#x: int
+#y: int
+#errors :String
+--
++&lt;&lt;constructor&gt;&gt; Square(x: int, y: int)
++getContent(): String
++setContent(content: String): boolean
++getNumOfChanges(): int
++getImagePath(): String
++setImagePath(imagePath: String): void
+#getX(): int
+#getY(): int
+#setError(): void
+
+
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>896</x>
+      <y>518</y>
+      <w>21</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>658</x>
+      <y>63</y>
+      <w>175</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;use&gt;&gt;</panel_attributes>
+    <additional_attributes>230.0;10.0;100.0;10.0;100.0;170.0;10.0;170.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>896</x>
+      <y>112</y>
+      <w>42</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;use&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>714</x>
+      <y>252</y>
+      <w>98</w>
+      <h>245</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;use&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;330.0;10.0;10.0;120.0;10.0</additional_attributes>
   </element>
 </diagram>

@@ -42,25 +42,11 @@ public class ConfigLoader {
     }
 
     public static int getGridWidth() throws NumberFormatException {
-        int width = 0;
-        try {
-            width = Integer.parseInt(properties.getProperty(ConfigKeys.GRID_WIDTH));
-        } catch (NumberFormatException e) {
-            Logger.getLogger(ObjectCreator.class.getName()).log(Level.SEVERE, "You have not specified grid width and height in configs.txt", e);
-            System.exit(1);
-        }
-        return width;
+        return Integer.parseInt(properties.getProperty(ConfigKeys.GRID_WIDTH));
     }
 
     public static int getGridHeight() throws NumberFormatException {
-        int height = 0;
-        try {
-            height = Integer.parseInt(properties.getProperty(ConfigKeys.GRID_HEIGHT));
-        } catch (NumberFormatException e) {
-            Logger.getLogger(ObjectCreator.class.getName()).log(Level.SEVERE, "You have not specified grid width and height in configs.txt, exiting...", e);
-            System.exit(1);
-        }
-        return height;
+        return Integer.parseInt(properties.getProperty(ConfigKeys.GRID_HEIGHT));
     }
 
     public static void printProperties() {

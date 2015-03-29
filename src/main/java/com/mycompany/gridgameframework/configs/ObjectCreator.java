@@ -6,12 +6,14 @@
 package com.mycompany.gridgameframework.configs;
 
 import com.mycompany.gridgameframework.Board;
+import com.mycompany.gridgameframework.BoardComponent;
 import com.mycompany.gridgameframework.DefaultEndGameRule;
 import com.mycompany.gridgameframework.DefaultTurnChangeRule;
 import com.mycompany.gridgameframework.GameStats;
 import com.mycompany.gridgameframework.InputValidator;
 import com.mycompany.gridgameframework.PointsCalculator;
 import com.mycompany.gridgameframework.Rule;
+import com.mycompany.gridgameframework.Square;
 import com.mycompany.gridgameframework.configs.ConfigKeys;
 import java.lang.instrument.IllegalClassFormatException;
 import java.lang.reflect.Constructor;
@@ -48,21 +50,20 @@ public class ObjectCreator {
     public PointsCalculator createPointsCalculator() {
         try {
             Object pointsCalc = getConstructor(properties.getProperty(PointsCalculator.class.getSimpleName())).newInstance();
-            if(pointsCalc instanceof PointsCalculator){
+            if (pointsCalc instanceof PointsCalculator) {
                 return (PointsCalculator) pointsCalc;
-            }else{
-                 throw new IllegalClassFormatException();
+            } else {
+                throw new IllegalClassFormatException();
             }
-        } catch(IllegalClassFormatException ex) {
+        } catch (IllegalClassFormatException ex) {
             Logger.getLogger(ObjectCreator.class.getName()).log(Level.SEVERE,
-                         properties.getProperty(PointsCalculator.class.getSimpleName()) + 
-                                 " does not implement PointsCalculator interface, no points will be calculated!");
+                    properties.getProperty(PointsCalculator.class.getSimpleName())
+                    + " does not implement PointsCalculator interface, no points will be calculated!");
             return null;
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             Logger.getLogger(ObjectCreator.class.getName()).log(Level.INFO, "No points calculator found. Points will not be calculated", ex);
             return null;
-        } 
+        }
     }
 
     public InputValidator createInputValidator() {
@@ -75,16 +76,20 @@ public class ObjectCreator {
     }
 
     public List<Rule> createRules() {
-        List<String> ruleClasses = Arrays.asList(properties.getProperty(ConfigKeys.RULES).split(","));
+        String ruleStr = properties.getProperty(ConfigKeys.RULES);
+        List<String> ruleClasses = new ArrayList();
+        if(ruleStr != null){
+            ruleClasses = Arrays.asList(ruleStr.split(","));
+        }
         List<Rule> rules = new ArrayList();
         for (String className : ruleClasses) {
             try {
                 rules.add((Rule) getConstructor(className).newInstance());
             } catch (Exception ex) {
                 Logger.getLogger(ObjectCreator.class.getName()).log(Level.SEVERE, "Unexpected error in creating rules", ex);
-            } 
+            }
         }
-        if(rules.isEmpty()){
+        if (rules.isEmpty()) {
             rules.add(new DefaultEndGameRule());
             rules.add(new DefaultTurnChangeRule());
         }
@@ -93,18 +98,28 @@ public class ObjectCreator {
 
     public Board createBoard() {
         try {
-            return (Board) getConstructor(properties.getProperty(ConfigKeys.BOARD), int.class, int.class).newInstance(ConfigLoader.getGridWidth(), ConfigLoader.getGridHeight());
+            return (Board) getConstructor(properties.getProperty(Board.class.getSimpleName()), int.class, int.class).newInstance(ConfigLoader.getGridWidth(), ConfigLoader.getGridHeight());
         } catch (Exception ex) {
-            try{
+            try {
                 return new Board(ConfigLoader.getGridWidth(), ConfigLoader.getGridHeight());
-            }catch(Exception e){
+            } catch (Exception e) {
                 Logger.getLogger(ObjectCreator.class.getName()).log(
                         Level.SEVERE, "Could not find the board dimensions in the configs file, creating "
-                                + "a board with default dimensions: width: " + Board.DEFAULT_WIDTH + 
-                                ", height: " + Board.DEFAULT_HEIGHT, ex);
+                        + "a board with default dimensions: width: " + Board.DEFAULT_WIDTH
+                        + ", height: " + Board.DEFAULT_HEIGHT, ex);
                 return new Board(Board.DEFAULT_WIDTH, Board.DEFAULT_HEIGHT);
             }
-            
+        }
+    }
+
+    public BoardComponent createBoardComponent(int x, int y) {
+        try {
+            return (BoardComponent) getConstructor(properties.getProperty(BoardComponent.class.getSimpleName()), int.class, int.class).newInstance(x, y);
+        } catch (Exception ex) {
+            Logger.getLogger(ObjectCreator.class.getName()).log(
+                    Level.SEVERE, "No custom board component provided, using the default"
+                    + " square implementation", ex);
+            return new Square(x, y);
         }
     }
 

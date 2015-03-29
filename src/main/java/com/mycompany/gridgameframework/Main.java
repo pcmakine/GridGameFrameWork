@@ -5,31 +5,22 @@
  */
 package com.mycompany.gridgameframework;
 
-import com.mycompany.gridgameframework.configs.ConfigLoader;
 import com.mycompany.gridgameframework.gui.DefaultGui;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Pete
  */
 public class Main {
-    
-    public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 
-        List list = Arrays.asList(ConfigLoader.getProperties().getProperty("rules").split(","));
-        System.out.println(list);
-        Board board = new Board(10, 10);
-        System.out.println(board);
-        
-        final DefaultGui gui = new DefaultGui(board.getWidth(), board.getHeight());
+    public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException {
+
+        Game game = Game.getGame();
+
+        final DefaultGui gui = new DefaultGui(game.getBoard().getWidth(), game.getBoard().getHeight());
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
