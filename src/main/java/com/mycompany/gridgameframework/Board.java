@@ -70,7 +70,7 @@ public class Board {
     public boolean isFilled(){
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                if(getSquareAt(j, i).getContent().isEmpty()){
+                if(getSquareAt(j, i).getContent() == null || getSquareAt(j, i).getContent().isEmpty()){
                     return false;
                 }
             }

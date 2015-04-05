@@ -12,5 +12,5 @@ import java.util.List;
  * @author Pete
  */
 public interface UserInteractionObserver {
-    public void onUserInteraction(int x , int y, String input);
+    public boolean onUserInteraction(int x , int y, String input);
 }

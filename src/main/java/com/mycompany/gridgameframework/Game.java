@@ -79,9 +79,10 @@ public class Game implements UserInteractionObserver {
     }
 
     @Override
-    public void onUserInteraction(int x, int y, String input) {
+    public boolean onUserInteraction(int x, int y, String input) {
         boolean validInput = board.setUserInputAt(x, y, input);
         checkRules(validInput);
+        return validInput;
     }
 
     private void checkRules(boolean inputValid) {
