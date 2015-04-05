@@ -11,15 +11,26 @@ import java.util.List;
  *
  * @author Pete
  */
-public class Board {
+public class Board implements BoardI {
     public static int DEFAULT_WIDTH = 10;
     public static int DEFAULT_HEIGHT = 10;
+    public static int MAX_WIDTH = 30;
+    public static int MAX_HEIGHT = 30;
+    public static int MIN_WIDTH = 2;
+    public static int MIN_HEIGHT = 2;
     
     private int width;
     private int height;
     private BoardComponent[][] squares;
 
-    public Board(int width, int height) {
+    public Board(int width, int height) throws IllegalArgumentException{
+        if(width < MIN_WIDTH || width > MAX_WIDTH || height < MIN_HEIGHT ||
+                height > MAX_HEIGHT){
+            throw new IllegalArgumentException("The given board dimensions are illegal. Max width: " + MAX_WIDTH +
+                                ", Max height: " + MAX_HEIGHT + ", Min width: " + MIN_WIDTH +
+                                ", Min height: " + MIN_HEIGHT + ". Given width: " + width +
+                    ". Given height: " + height);
+        }
         this.width = width;
         this.height = height;
         squares = new BoardComponent[height][width];
@@ -38,10 +49,12 @@ public class Board {
 
     protected void initContent(Square square){};
 
+    @Override
     public BoardComponent[][] getSquares() {
         return squares;
     }
 
+    @Override
     public BoardComponent getSquareAt(int x, int y) throws IllegalArgumentException {
         if(!coordsOnBoard(x, y)){
             throw new IllegalArgumentException();
@@ -49,14 +62,17 @@ public class Board {
         return squares[y][x];
     }
 
+    @Override
     public int getWidth() {
         return width;
     }
 
+    @Override
     public int getHeight() {
         return height;
     }
 
+    @Override
     public boolean setUserInputAt(int x, int y, String input) {
         BoardComponent square = getSquareAt(x, y);
         square.setContent(input);
@@ -67,6 +83,7 @@ public class Board {
         return x >= 0 && y >= 0 && x <= width && y <= height;
     }
     
+    @Override
     public boolean isFilled(){
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {

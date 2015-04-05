@@ -14,10 +14,9 @@ import java.util.List;
  *
  * @author Pete
  */
-public class Game implements UserInteractionObserver {
+public class Game {
 
-    private static Game INSTANCE = new Game();
-    private Board board;
+    private BoardI board;
     private List<Rule> rules;
     private String name;
     private GameStats stats;
@@ -25,15 +24,11 @@ public class Game implements UserInteractionObserver {
     private boolean gameOver;
     private boolean started;
 
-    private Game() {
-        ObjectCreator creator = new ObjectCreator(ConfigLoader.getProperties());
+    public Game() {
+        ObjectCreator creator = new ObjectCreator();
         this.board = creator.createBoard();
         this.rules = creator.createRules();
         this.stats = creator.createGameStats();
-    }
-
-    public static Game getGame() {
-        return INSTANCE;
     }
 
     public boolean isStarted() {
@@ -51,6 +46,11 @@ public class Game implements UserInteractionObserver {
     public void pauseGame() {
         stats.pauseGame();
         paused = true;
+    }
+    
+    public void resumeGame(){
+        stats.resumeGame();
+        paused = false;
     }
 
     public void newTurn() {
@@ -74,12 +74,11 @@ public class Game implements UserInteractionObserver {
         return name;
     }
 
-    public Board getBoard() {
+    public BoardI getBoard() {
         return board;
     }
 
-    @Override
-    public boolean onUserInteraction(int x, int y, String input) {
+    public boolean onUserInput(int x, int y, String input) {
         boolean validInput = board.setUserInputAt(x, y, input);
         checkRules(validInput);
         return validInput;
@@ -94,5 +93,4 @@ public class Game implements UserInteractionObserver {
             }
         }
     }
-
 }

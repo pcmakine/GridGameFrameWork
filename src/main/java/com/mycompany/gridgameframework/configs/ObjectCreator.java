@@ -5,16 +5,7 @@
  */
 package com.mycompany.gridgameframework.configs;
 
-import com.mycompany.gridgameframework.Board;
-import com.mycompany.gridgameframework.BoardComponent;
-import com.mycompany.gridgameframework.DefaultEndGameRule;
-import com.mycompany.gridgameframework.DefaultTurnChangeRule;
-import com.mycompany.gridgameframework.GameStats;
-import com.mycompany.gridgameframework.InputValidator;
-import com.mycompany.gridgameframework.PointsCalculator;
-import com.mycompany.gridgameframework.Rule;
-import com.mycompany.gridgameframework.Square;
-import com.mycompany.gridgameframework.configs.ConfigKeys;
+import com.mycompany.gridgameframework.*;
 import java.lang.instrument.IllegalClassFormatException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -34,8 +25,8 @@ public class ObjectCreator {
 
     private Properties properties;
 
-    public ObjectCreator(Properties properties) {
-        this.properties = properties;
+    public ObjectCreator() {
+        this.properties = ConfigLoader.getProperties();
     }
 
     public GameStats createGameStats() {
@@ -44,7 +35,7 @@ public class ObjectCreator {
         } catch (Exception ex) {
             Logger.getLogger(ObjectCreator.class.getName()).log(Level.INFO, "no custom game stats found, using the default class", ex);
         }
-        return new GameStats(new Date());
+        return new GameStats(new Date(), createPointsCalculator());
     }
 
     public PointsCalculator createPointsCalculator() {
@@ -57,8 +48,9 @@ public class ObjectCreator {
             }
         } catch (IllegalClassFormatException ex) {
             Logger.getLogger(ObjectCreator.class.getName()).log(Level.SEVERE,
-                    properties.getProperty(PointsCalculator.class.getSimpleName())
-                    + " does not implement PointsCalculator interface, no points will be calculated!");
+                    properties.getProperty("Points calculator needs to implement"
+                            + PointsCalculator.class.getSimpleName())
+                    + " interface. No points will be calculated!");
             return null;
         } catch (Exception ex) {
             Logger.getLogger(ObjectCreator.class.getName()).log(Level.INFO, "No points calculator found. Points will not be calculated", ex);
@@ -102,14 +94,19 @@ public class ObjectCreator {
         } catch (Exception ex) {
             try {
                 return new Board(ConfigLoader.getGridWidth(), ConfigLoader.getGridHeight());
-            } catch (Exception e) {
+            } catch(IllegalArgumentException e){
+                Logger.getLogger(ObjectCreator.class.getName()).log(Level.SEVERE, "", e);
+                System.exit(1);
+            }
+            catch (Exception e) {
                 Logger.getLogger(ObjectCreator.class.getName()).log(
                         Level.SEVERE, "Could not find the board dimensions in the configs file, creating "
                         + "a board with default dimensions: width: " + Board.DEFAULT_WIDTH
-                        + ", height: " + Board.DEFAULT_HEIGHT, ex);
+                        + ", height: " + Board.DEFAULT_HEIGHT, e);
                 return new Board(Board.DEFAULT_WIDTH, Board.DEFAULT_HEIGHT);
             }
         }
+        return null;
     }
 
     public BoardComponent createBoardComponent(int x, int y) {
@@ -133,5 +130,4 @@ public class ObjectCreator {
         }
         return clazz.getConstructor(params);
     }
-
 }

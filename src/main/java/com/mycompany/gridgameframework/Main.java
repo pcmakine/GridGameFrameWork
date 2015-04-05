@@ -5,7 +5,7 @@
  */
 package com.mycompany.gridgameframework;
 
-import com.mycompany.gridgameframework.gui.DefaultGui;
+import com.mycompany.gridgameframework.gui.MainWindow;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,14 +18,14 @@ public class Main {
 
     public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException {
 
-        Game game = Game.getGame();
+        Game game = GameController.getController().getGame();
 
-        final DefaultGui gui = new DefaultGui(game.getBoard().getWidth(), game.getBoard().getHeight());
+/*        final MainWindow gui = new MainWindow(game.getBoard().getWidth(), game.getBoard().getHeight());
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
                 gui.init();
             }
-        });
+        });*/
     }
 }

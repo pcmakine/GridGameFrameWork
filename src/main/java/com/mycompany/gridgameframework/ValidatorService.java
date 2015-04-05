@@ -22,7 +22,7 @@ public class ValidatorService {
     private InputValidator validator;
 
     private ValidatorService() {
-        this.validator = new ObjectCreator(ConfigLoader.getProperties()).createInputValidator();
+        this.validator = new ObjectCreator().createInputValidator();
 
     }
 

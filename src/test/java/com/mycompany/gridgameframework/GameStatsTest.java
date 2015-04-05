@@ -40,12 +40,11 @@ public class GameStatsTest {
     
     @Test
     public void sessionDurationGivesCorrectDuration() throws InterruptedException{
-        GameStats stats = new GameStats(new Date()) {
-            @Override
-            public int calculatePoints() {
+        GameStats stats = new GameStats(new Date(), new PointsCalculator() {
+            public int calculatePoints(GameStats stats){
                 return 0;
             }
-        };
+        });
         
         Thread.sleep(3000);
         

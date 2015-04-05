@@ -6,6 +6,7 @@
 package com.mycompany.gridgameframework.gui;
 
 import com.mycompany.gridgameframework.Game;
+import com.mycompany.gridgameframework.GameController;
 import com.mycompany.gridgameframework.UserInteractionObserver;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -26,36 +27,42 @@ import javax.swing.text.PlainDocument;
 public class InputBox {
 
     private static Font font = new Font("Courier", Font.BOLD, 15);
-    private JTextField inputField;
-    private final int limit;
+    protected JTextField inputField;
+    protected final int limit;
 
     public InputBox(final int limit, final int x, final int y) {
         this.limit = limit;
         this.inputField = new JTextField();
-        inputField.addActionListener(new ActionListener() {
+        setActionListener(x, y);
+        setInputFieldProperties();
+        inputField.setDocument(new PlainDocument() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println(e.getActionCommand());
-                UserInteractionObserver observer = Game.getGame();
-                
-                if(!observer.onUserInteraction(x, y, e.getActionCommand())){
-                    inputField.setBorder(BorderFactory.createLineBorder(Color.RED, 3));
-                }
-            }
-        });
-        inputField.setVisible(true);
-        inputField.setPreferredSize(new Dimension(40, 40));
-        inputField.setHorizontalAlignment(JTextField.CENTER);
-        inputField.setFont(font);
-        inputField.setDocument(new PlainDocument(){
-            @Override
-            public void insertString(int offs, String str, AttributeSet a) 
-                    throws BadLocationException{
-                if(getLength() + str.length() <= limit){
+            public void insertString(int offs, String str, AttributeSet a)
+                    throws BadLocationException {
+                if (getLength() + str.length() <= limit) {
                     super.insertString(offs, str, a);
                 }
             }
         });
+    }
+
+    protected void setActionListener(final int x, final int y) {
+        inputField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                UserInteractionObserver observer = GameController.getController();
+                if (!observer.onUserInput(x, y, e.getActionCommand())) {
+                    inputField.setBorder(BorderFactory.createLineBorder(Color.RED, 3));
+                }
+            }
+        });
+    }
+
+    protected void setInputFieldProperties() {
+        inputField.setVisible(true);
+        inputField.setPreferredSize(new Dimension(40, 40));
+        inputField.setHorizontalAlignment(JTextField.CENTER);
+        inputField.setFont(font);
     }
 
     public JTextField getTextField() {

@@ -21,9 +21,9 @@ public class GameStats {
     protected int playedTurns;
     protected PointsCalculator pointsCalc;
 
-    public GameStats(Date startTime) {
+    public GameStats(Date startTime, PointsCalculator pointsCalc) {
         this.sessionStartTime = startTime;
-        this.pointsCalc = new ObjectCreator(ConfigLoader.getProperties()).createPointsCalculator();
+        this.pointsCalc = pointsCalc;
     }
     
     public int calculatePoints(){
@@ -36,6 +36,10 @@ public class GameStats {
     public void pauseGame() {
         updateGameTime();
         sessionStartTime = null;
+    }
+    
+    public void resumeGame(){
+        sessionStartTime = new Date();
     }
 
     public void endGame(Date endTime) {

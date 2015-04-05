@@ -12,5 +12,8 @@ import java.util.List;
  * @author Pete
  */
 public interface UserInteractionObserver {
-    public boolean onUserInteraction(int x , int y, String input);
+    public boolean onUserInput(int x , int y, String input);
+    public void onPauseClick();
+    public void onResumeClick();
+    public void onSaveGameClick();
 }
