@@ -6,29 +6,33 @@
 package com.mycompany.gridgameframework;
 
 import com.mycompany.gridgameframework.gui.MainWindow;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  *
  * @author Pete
  */
 public class GameController implements UserInteractionObserver {
+
     private static GameController INSTANCE = new GameController();
     private Game game;
-    
-    private GameController(){
+    private final MainWindow gui;
+
+    private GameController() {
         this.game = new Game();
-        
-        final MainWindow gui = new MainWindow(game.getBoard().getWidth(), game.getBoard().getHeight());
+        game.getStats().addObserver(this);
+
+        gui = new MainWindow(game.getBoard().getWidth(), game.getBoard().getHeight());
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
                 gui.init();
             }
         });
-        
     }
-    
-    public static GameController getController(){
+
+    public static GameController getController() {
         return INSTANCE;
     }
 
@@ -51,9 +55,19 @@ public class GameController implements UserInteractionObserver {
     public void onSaveGameClick() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    public Game getGame(){
+
+    public Game getGame() {
         return game;
     }
-    
+
+    @Override
+    public void update(Observable o, final Object arg) {
+        final GameStatsI stats = (GameStatsI) o;
+        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                gui.updateTimeLabel(stats.getGameTimeInSeconds());
+            }
+        });
+    }
 }

@@ -20,12 +20,5 @@ public class Main {
 
         Game game = GameController.getController().getGame();
 
-/*        final MainWindow gui = new MainWindow(game.getBoard().getWidth(), game.getBoard().getHeight());
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                gui.init();
-            }
-        });*/
     }
 }

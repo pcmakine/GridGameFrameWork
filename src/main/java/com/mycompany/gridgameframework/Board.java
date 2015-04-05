@@ -12,24 +12,25 @@ import java.util.List;
  * @author Pete
  */
 public class Board implements BoardI {
+
     public static int DEFAULT_WIDTH = 10;
     public static int DEFAULT_HEIGHT = 10;
     public static int MAX_WIDTH = 30;
     public static int MAX_HEIGHT = 30;
     public static int MIN_WIDTH = 2;
     public static int MIN_HEIGHT = 2;
-    
+
     private int width;
     private int height;
     private BoardComponent[][] squares;
 
-    public Board(int width, int height) throws IllegalArgumentException{
-        if(width < MIN_WIDTH || width > MAX_WIDTH || height < MIN_HEIGHT ||
-                height > MAX_HEIGHT){
-            throw new IllegalArgumentException("The given board dimensions are illegal. Max width: " + MAX_WIDTH +
-                                ", Max height: " + MAX_HEIGHT + ", Min width: " + MIN_WIDTH +
-                                ", Min height: " + MIN_HEIGHT + ". Given width: " + width +
-                    ". Given height: " + height);
+    public Board(int width, int height) throws IllegalArgumentException {
+        if (width < MIN_WIDTH || width > MAX_WIDTH || height < MIN_HEIGHT
+                || height > MAX_HEIGHT) {
+            throw new IllegalArgumentException("The given board dimensions are illegal. Max width: " + MAX_WIDTH
+                    + ", Max height: " + MAX_HEIGHT + ", Min width: " + MIN_WIDTH
+                    + ", Min height: " + MIN_HEIGHT + ". Given width: " + width
+                    + ". Given height: " + height);
         }
         this.width = width;
         this.height = height;
@@ -47,7 +48,13 @@ public class Board implements BoardI {
         }
     }
 
-    protected void initContent(Square square){};
+    protected void initContent(Square square) {
+        if ((square.getX() == 1 && square.getY() == 0)
+                || (square.getX() == 8 && square.getY() == 8)) {
+            square.setContent("v");
+        }
+
+    }
 
     @Override
     public BoardComponent[][] getSquares() {
@@ -56,7 +63,7 @@ public class Board implements BoardI {
 
     @Override
     public BoardComponent getSquareAt(int x, int y) throws IllegalArgumentException {
-        if(!coordsOnBoard(x, y)){
+        if (!coordsOnBoard(x, y)) {
             throw new IllegalArgumentException();
         }
         return squares[y][x];
@@ -82,12 +89,12 @@ public class Board implements BoardI {
     private boolean coordsOnBoard(int x, int y) {
         return x >= 0 && y >= 0 && x <= width && y <= height;
     }
-    
+
     @Override
-    public boolean isFilled(){
+    public boolean isFilled() {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                if(getSquareAt(j, i).getContent() == null || getSquareAt(j, i).getContent().isEmpty()){
+                if (getSquareAt(j, i).getContent() == null || getSquareAt(j, i).getContent().isEmpty()) {
                     return false;
                 }
             }

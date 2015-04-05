@@ -30,7 +30,7 @@ public class InputBox {
     protected JTextField inputField;
     protected final int limit;
 
-    public InputBox(final int limit, final int x, final int y) {
+    public InputBox(final int limit, final int x, final int y, String initialContent) {
         this.limit = limit;
         this.inputField = new JTextField();
         setActionListener(x, y);
@@ -44,6 +44,7 @@ public class InputBox {
                 }
             }
         });
+        inputField.setText(initialContent);
     }
 
     protected void setActionListener(final int x, final int y) {

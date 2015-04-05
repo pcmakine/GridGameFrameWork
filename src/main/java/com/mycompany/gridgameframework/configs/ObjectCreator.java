@@ -35,7 +35,7 @@ public class ObjectCreator {
         } catch (Exception ex) {
             Logger.getLogger(ObjectCreator.class.getName()).log(Level.INFO, "no custom game stats found, using the default class", ex);
         }
-        return new GameStats(new Date(), createPointsCalculator());
+        return new GameStats(createPointsCalculator());
     }
 
     public PointsCalculator createPointsCalculator() {

@@ -8,7 +8,11 @@ package com.mycompany.gridgameframework.gui;
 import com.mycompany.gridgameframework.Game;
 import com.mycompany.gridgameframework.GameController;
 import com.mycompany.gridgameframework.UserInteractionObserver;
+import java.awt.BorderLayout;
+import java.awt.ComponentOrientation;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.LayoutManager;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,6 +31,8 @@ public class MainWindow {
     private int boardWidth;
     private int boardHeight;
     private JPanel boardArea;
+    private JPanel statsArea;
+    private JLabel timeLabel;
     private GuiSquare[][] board;
     private UserInteractionObserver observer;
 
@@ -45,6 +51,7 @@ public class MainWindow {
 
     protected void createFrame() {
         frame = new JFrame();
+        frame.getContentPane().setLayout(new BorderLayout());
         frame.setTitle("Easy Grid Game");
         frame.setSize(500, 500);
         frame.setLocationRelativeTo(null);
@@ -53,6 +60,7 @@ public class MainWindow {
 
     protected void createComponents() {
         createBoardArea();
+        createStatsArea();
     }
 
     protected void createBoardArea() {
@@ -96,11 +104,31 @@ public class MainWindow {
         board[y][x] = square;
         boardArea.add(square.getPanel());
     }
+    
+    private void createStatsArea(){
+        statsArea = new JPanel(new BorderLayout());
+        JLabel statsLabel = new JLabel("Stats");
+        statsLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        statsArea.add(statsLabel, BorderLayout.NORTH);
+        timeLabel = new JLabel("Elapsed time: 0");
+        timeLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        statsArea.add(timeLabel, BorderLayout.CENTER);
+    }
 
     protected void addComponentsToFrame() {
-        frame.add(boardArea);
+        frame.add(boardArea, BorderLayout.CENTER);
+        frame.add(statsArea, BorderLayout.SOUTH);
         frame.setVisible(true);
         frame.pack();
+    }
+    
+    public void updateTimeLabel(long seconds){
+        if(timeLabel != null){
+            this.timeLabel.setText("Elapsed time: " + seconds);
+            timeLabel.updateUI();
+        }
+        
+        
     }
 
 }

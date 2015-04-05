@@ -29,6 +29,7 @@ public class Game {
         this.board = creator.createBoard();
         this.rules = creator.createRules();
         this.stats = creator.createGameStats();
+        stats.startGame(new Date());
     }
 
     public boolean isStarted() {
@@ -76,6 +77,14 @@ public class Game {
 
     public BoardI getBoard() {
         return board;
+    }
+    
+    public GameStats getStats(){
+        return stats;
+    }
+    
+    public void setStats(GameStats stats){
+        this.stats = stats;
     }
 
     public boolean onUserInput(int x, int y, String input) {

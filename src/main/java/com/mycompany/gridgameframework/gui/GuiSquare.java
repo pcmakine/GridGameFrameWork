@@ -40,7 +40,7 @@ public class GuiSquare<E> extends Square<E> {
 
     protected void setLabelOrTextField(BoardComponent component) {
         if (component.getHint() == null) {
-            panel.add(new InputBox(1 , component.getX(), component.getY()).getTextField());
+            panel.add(new InputBox(1 , component.getX(), component.getY(), component.getContent()).getTextField());
             return;
         }
         if (component.getHint() instanceof BufferedImage) {

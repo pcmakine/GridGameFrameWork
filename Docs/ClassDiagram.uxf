@@ -5,9 +5,9 @@
     <id>UMLClass</id>
     <coordinates>
       <x>402</x>
-      <y>156</y>
+      <y>114</y>
       <w>252</w>
-      <h>216</h>
+      <h>234</h>
     </coordinates>
     <panel_attributes>	Game
 --
@@ -31,6 +31,8 @@
 +setName(name: String): boolean
 +getName(): String
 +getBoard(): BoardI
++getStats(): GameStats
++setStats(stats: GameStats): void
 -checkRules(inputValid: boolean): void</panel_attributes>
     <additional_attributes/>
   </element>
@@ -38,7 +40,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>462</x>
-      <y>558</y>
+      <y>528</y>
       <w>198</w>
       <h>132</h>
     </coordinates>
@@ -65,7 +67,7 @@ _+MIN_HEIGHT: int_
     <id>Relation</id>
     <coordinates>
       <x>546</x>
-      <y>366</y>
+      <y>342</y>
       <w>18</w>
       <h>60</h>
     </coordinates>
@@ -78,7 +80,7 @@ m2=1</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>480</x>
-      <y>756</y>
+      <y>714</y>
       <w>162</w>
       <h>114</h>
     </coordinates>
@@ -105,7 +107,7 @@ BoardComponent&lt;E&gt;
     <id>UMLClass</id>
     <coordinates>
       <x>156</x>
-      <y>426</y>
+      <y>384</y>
       <w>210</w>
       <h>66</h>
     </coordinates>
@@ -124,20 +126,20 @@ Rule
     <id>Relation</id>
     <coordinates>
       <x>360</x>
-      <y>366</y>
+      <y>342</y>
       <w>78</w>
-      <h>108</h>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m2=1
 m1=2..*</panel_attributes>
-    <additional_attributes>10.0;150.0;110.0;150.0;110.0;10.0</additional_attributes>
+    <additional_attributes>10.0;120.0;110.0;120.0;110.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>30</x>
-      <y>156</y>
+      <y>114</y>
       <w>324</w>
       <h>192</h>
     </coordinates>
@@ -170,7 +172,7 @@ m1=2..*</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>348</x>
-      <y>210</y>
+      <y>168</y>
       <w>66</w>
       <h>24</h>
     </coordinates>
@@ -183,7 +185,7 @@ m2=1</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>996</x>
-      <y>702</y>
+      <y>660</y>
       <w>210</w>
       <h>108</h>
     </coordinates>
@@ -200,21 +202,21 @@ InputValidator
     <id>Relation</id>
     <coordinates>
       <x>546</x>
-      <y>684</y>
+      <y>654</y>
       <w>42</w>
-      <h>84</h>
+      <h>72</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
 m1=1
 m2=4..900
 </panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;120.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>942</x>
-      <y>606</y>
+      <y>564</y>
       <w>66</w>
       <h>24</h>
     </coordinates>
@@ -226,7 +228,7 @@ m2=4..900
     <id>UMLClass</id>
     <coordinates>
       <x>732</x>
-      <y>156</y>
+      <y>114</y>
       <w>186</w>
       <h>66</h>
     </coordinates>
@@ -244,7 +246,7 @@ UserInteractionObserver
     <id>Relation</id>
     <coordinates>
       <x>840</x>
-      <y>216</y>
+      <y>174</y>
       <w>18</w>
       <h>66</h>
     </coordinates>
@@ -255,7 +257,7 @@ UserInteractionObserver
     <id>UMLClass</id>
     <coordinates>
       <x>720</x>
-      <y>414</y>
+      <y>372</y>
       <w>216</w>
       <h>102</h>
     </coordinates>
@@ -278,7 +280,7 @@ UserInteractionObserver
     <id>UMLClass</id>
     <coordinates>
       <x>990</x>
-      <y>228</y>
+      <y>186</y>
       <w>138</w>
       <h>102</h>
     </coordinates>
@@ -299,7 +301,7 @@ _+getProperties(): Properties_
     <id>Relation</id>
     <coordinates>
       <x>648</x>
-      <y>354</y>
+      <y>312</y>
       <w>138</w>
       <h>72</h>
     </coordinates>
@@ -312,7 +314,7 @@ _+getProperties(): Properties_
     <id>UMLClass</id>
     <coordinates>
       <x>996</x>
-      <y>552</y>
+      <y>510</y>
       <w>210</w>
       <h>114</h>
     </coordinates>
@@ -331,7 +333,7 @@ _+getService(): ValidatorService()_
     <id>Relation</id>
     <coordinates>
       <x>1098</x>
-      <y>660</y>
+      <y>618</y>
       <w>18</w>
       <h>54</h>
     </coordinates>
@@ -344,7 +346,7 @@ m2=1</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>132</x>
-      <y>486</y>
+      <y>444</y>
       <w>90</w>
       <h>60</h>
     </coordinates>
@@ -355,7 +357,7 @@ m2=1</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>84</x>
-      <y>534</y>
+      <y>492</y>
       <w>132</w>
       <h>30</h>
     </coordinates>
@@ -370,7 +372,7 @@ m2=1</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>72</x>
-      <y>42</y>
+      <y>0</y>
       <w>162</w>
       <h>60</h>
     </coordinates>
@@ -385,7 +387,7 @@ PointsCalculator
     <id>Relation</id>
     <coordinates>
       <x>138</x>
-      <y>96</y>
+      <y>54</y>
       <w>18</w>
       <h>72</h>
     </coordinates>
@@ -398,7 +400,7 @@ m2=1</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>246</x>
-      <y>534</y>
+      <y>492</y>
       <w>132</w>
       <h>30</h>
     </coordinates>
@@ -413,7 +415,7 @@ m2=1</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>204</x>
-      <y>486</y>
+      <y>444</y>
       <w>120</w>
       <h>60</h>
     </coordinates>
@@ -424,7 +426,7 @@ m2=1</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>786</x>
-      <y>576</y>
+      <y>534</y>
       <w>162</w>
       <h>168</h>
     </coordinates>
@@ -458,7 +460,7 @@ m2=1</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>636</x>
-      <y>738</y>
+      <y>696</y>
       <w>192</w>
       <h>78</h>
     </coordinates>
@@ -469,7 +471,7 @@ m2=1</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>930</x>
-      <y>324</y>
+      <y>282</y>
       <w>180</w>
       <h>120</h>
     </coordinates>
@@ -481,19 +483,19 @@ m2=1</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>654</x>
-      <y>510</y>
+      <y>468</y>
       <w>126</w>
-      <h>144</h>
+      <h>156</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;use&gt;&gt;</panel_attributes>
-    <additional_attributes>160.0;10.0;160.0;220.0;10.0;220.0</additional_attributes>
+    <additional_attributes>160.0;10.0;160.0;240.0;10.0;240.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>732</x>
-      <y>270</y>
+      <y>228</y>
       <w>186</w>
       <h>72</h>
     </coordinates>
@@ -511,7 +513,7 @@ _-INSTANCE: GameController_
     <id>Relation</id>
     <coordinates>
       <x>648</x>
-      <y>294</y>
+      <y>252</y>
       <w>96</w>
       <h>24</h>
     </coordinates>
@@ -523,7 +525,7 @@ _-INSTANCE: GameController_
     <id>Relation</id>
     <coordinates>
       <x>846</x>
-      <y>336</y>
+      <y>294</y>
       <w>36</w>
       <h>90</h>
     </coordinates>
@@ -535,7 +537,7 @@ _-INSTANCE: GameController_
     <id>Relation</id>
     <coordinates>
       <x>930</x>
-      <y>432</y>
+      <y>390</y>
       <w>180</w>
       <h>132</h>
     </coordinates>
@@ -547,7 +549,7 @@ _-INSTANCE: GameController_
     <id>UMLClass</id>
     <coordinates>
       <x>198</x>
-      <y>672</y>
+      <y>630</y>
       <w>186</w>
       <h>72</h>
     </coordinates>
@@ -564,7 +566,7 @@ _-INSTANCE: GameController_
     <id>UMLClass</id>
     <coordinates>
       <x>456</x>
-      <y>414</y>
+      <y>390</y>
       <w>204</w>
       <h>108</h>
     </coordinates>
@@ -588,11 +590,11 @@ _-INSTANCE: GameController_
     <id>Relation</id>
     <coordinates>
       <x>546</x>
-      <y>516</y>
+      <y>492</y>
       <w>18</w>
-      <h>54</h>
+      <h>48</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
   </element>
 </diagram>

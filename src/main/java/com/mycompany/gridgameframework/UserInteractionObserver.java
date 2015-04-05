@@ -6,12 +6,13 @@
 package com.mycompany.gridgameframework;
 
 import java.util.List;
+import java.util.Observer;
 
 /**
  *
  * @author Pete
  */
-public interface UserInteractionObserver {
+public interface UserInteractionObserver extends Observer {
     public boolean onUserInput(int x , int y, String input);
     public void onPauseClick();
     public void onResumeClick();
