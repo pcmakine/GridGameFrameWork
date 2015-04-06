@@ -10,6 +10,7 @@ import com.mycompany.gridgameframework.configs.ObjectCreator;
 import java.util.Date;
 import java.util.Observable;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
@@ -24,6 +25,8 @@ public class GameStats extends Observable implements GameStatsI {
     protected Date endTime;
     protected int playedTurns;
     protected PointsCalculator pointsCalc;
+    protected ScheduledExecutorService timerExecutor;
+    protected Future timerTask;
 
     public GameStats(PointsCalculator pointsCalc) {
         this.pointsCalc = pointsCalc;
@@ -40,26 +43,21 @@ public class GameStats extends Observable implements GameStatsI {
     @Override
     public void startGame(Date startTime) {
         this.sessionStartTime = startTime;
-        ScheduledExecutorService ses = Executors.newSingleThreadScheduledExecutor();
-
-        ses.scheduleAtFixedRate(new Runnable() {
-            @Override
-            public void run() {
-                setChanged();
-                notifyObservers(gameTime + sessionDuration());
-            }
-        }, 0, 1, TimeUnit.SECONDS);
+        timerExecutor = Executors.newSingleThreadScheduledExecutor();
+        startScheduledUpdates();
     }
 
     @Override
     public void pauseGame() {
         updateGameTime();
         sessionStartTime = null;
+        timerTask.cancel(true);
     }
 
     @Override
     public void resumeGame() {
         sessionStartTime = new Date();
+        startScheduledUpdates();
     }
 
     @Override
@@ -67,10 +65,22 @@ public class GameStats extends Observable implements GameStatsI {
         this.endTime = endTime;
         updateGameTime();
         sessionStartTime = null;
+        timerTask.cancel(true);
+        timerExecutor.shutdown();
     }
 
     protected void updateGameTime() {
         gameTime = gameTime + sessionDuration();
+    }
+
+    protected void startScheduledUpdates() {
+        timerTask = timerExecutor.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+                setChanged();
+                notifyObservers(getGameTimeInSeconds());
+            }
+        }, 0, 1, TimeUnit.SECONDS);
     }
 
     @Override
