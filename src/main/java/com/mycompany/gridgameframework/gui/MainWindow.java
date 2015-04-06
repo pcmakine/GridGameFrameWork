@@ -5,6 +5,7 @@
  */
 package com.mycompany.gridgameframework.gui;
 
+import com.mycompany.gridgameframework.BoardI;
 import com.mycompany.gridgameframework.Game;
 import com.mycompany.gridgameframework.GameController;
 import com.mycompany.gridgameframework.UserInteractionObserver;
@@ -28,24 +29,18 @@ import javax.swing.SwingConstants;
 public class MainWindow {
 
     protected JFrame frame;
-    private int boardWidth;
-    private int boardHeight;
-    private JPanel boardArea;
-    private JPanel statsArea;
-    private JLabel timeLabel;
-    private GuiSquare[][] board;
-    private UserInteractionObserver observer;
+    protected JPanel boardArea;
+    protected JPanel statsArea;
+    protected JLabel timeLabel;
+    protected GuiSquare[][] board;
 
     public MainWindow(int boardWidth, int boardHeight) {
-        this.boardWidth = boardWidth;
-        this.boardHeight = boardHeight;
         board = new GuiSquare[boardHeight][boardWidth];
-        this.observer = GameController.getController();
     }
 
-    public void init() {
+    public void init(BoardI board) {
         createFrame();
-        createComponents();
+        createComponents(board);
         addComponentsToFrame();
     }
 
@@ -58,19 +53,19 @@ public class MainWindow {
         frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
     }
 
-    protected void createComponents() {
-        createBoardArea();
+    protected void createComponents(BoardI boardModel) {
+        createBoardArea(boardModel);
         createStatsArea();
     }
 
-    protected void createBoardArea() {
-        boardArea = new JPanel(new GridLayout(boardHeight + 1, boardWidth + 1));
-        for (int i = 0; i < boardHeight + 1; i++) {
-            for (int j = 0; j < boardWidth + 1; j++) {
+    protected void createBoardArea(BoardI boardModel) {
+        boardArea = new JPanel(new GridLayout(boardModel.getHeight() + 1, boardModel.getWidth() + 1));
+        for (int i = 0; i < boardModel.getHeight() + 1; i++) {
+            for (int j = 0; j < boardModel.getWidth() + 1; j++) {
                 if ((i == 0 || j == 0)) {
                     addCoordLabel(j, i, boardArea);
                 } else {
-                    addGuiSquare(j - 1, i - 1);
+                    addGuiSquare(boardModel, j - 1, i - 1);
                 }
             }
         }
@@ -88,17 +83,16 @@ public class MainWindow {
         container.add(label);
     }
 
-    private void addGuiSquare(int x, int y) {
-        Game game = GameController.getController().getGame();
+    private void addGuiSquare(BoardI boardModel, int x, int y) {
         GuiSquare square = null;
         try {
-            square = new GuiSquare(game.getBoard().getSquareAt(x, y));
+            square = new GuiSquare(boardModel.getSquareAt(x, y));
             //panel.add(new JLabel("(" + j + ", " + i + ")"));
         } catch (IOException ex) {
             Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, "Check the path for "
                     + "the board component's image. Board component at ("
-                    + game.getBoard().getSquareAt(x, y).getX() + ", "
-                    + game.getBoard().getSquareAt(x, y).getY() + ")", ex);
+                    + boardModel.getSquareAt(x, y).getX() + ", "
+                    + boardModel.getSquareAt(x, y).getY() + ")", ex);
             System.exit(1);
         }
         board[y][x] = square;

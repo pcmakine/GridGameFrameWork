@@ -48,13 +48,7 @@ public class Board implements BoardI {
         }
     }
 
-    protected void initContent(Square square) {
-        if ((square.getX() == 1 && square.getY() == 0)
-                || (square.getX() == 8 && square.getY() == 8)) {
-            square.setContent("v");
-        }
-
-    }
+    protected void initContent(Square square){};
 
     @Override
     public BoardComponent[][] getSquares() {

@@ -18,7 +18,7 @@ public class Main {
 
     public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException {
 
-        Game game = GameController.getController().getGame();
+        GameController controller = new GameController();
 
     }
 }

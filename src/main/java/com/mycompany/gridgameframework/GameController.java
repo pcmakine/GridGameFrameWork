@@ -15,11 +15,10 @@ import java.util.Observer;
  */
 public class GameController implements UserInteractionObserver {
 
-    private static GameController INSTANCE = new GameController();
     private Game game;
     private final MainWindow gui;
 
-    private GameController() {
+    public GameController() {
         this.game = new Game();
         game.getStats().addObserver(this);
 
@@ -27,13 +26,9 @@ public class GameController implements UserInteractionObserver {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                gui.init();
+                gui.init(game.getBoard());
             }
         });
-    }
-
-    public static GameController getController() {
-        return INSTANCE;
     }
 
     @Override
