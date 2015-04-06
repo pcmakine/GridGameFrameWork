@@ -26,7 +26,7 @@ public class GameController implements UserInteractionObserver {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                gui.init(game.getBoard());
+                gui.init(GameController.this, game.getBoard());
             }
         });
     }

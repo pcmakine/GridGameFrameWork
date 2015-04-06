@@ -30,10 +30,10 @@ public class InputBox {
     protected JTextField inputField;
     protected final int limit;
 
-    public InputBox(final int limit, final int x, final int y, String initialContent) {
+    public InputBox(UserInteractionObserver obs, final int limit, final int x, final int y, String initialContent) {
         this.limit = limit;
         this.inputField = new JTextField();
-        setActionListener(x, y);
+        setActionListener(obs, x, y);
         setInputFieldProperties();
         inputField.setDocument(new PlainDocument() {
             @Override
@@ -47,12 +47,11 @@ public class InputBox {
         inputField.setText(initialContent);
     }
 
-    protected void setActionListener(final int x, final int y) {
+    protected void setActionListener(final UserInteractionObserver obs, final int x, final int y) {
         inputField.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                UserInteractionObserver observer = GameController.getController();
-                if (!observer.onUserInput(x, y, e.getActionCommand())) {
+                if (!obs.onUserInput(x, y, e.getActionCommand())) {
                     inputField.setBorder(BorderFactory.createLineBorder(Color.RED, 3));
                 }
             }

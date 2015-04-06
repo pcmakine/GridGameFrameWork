@@ -38,9 +38,9 @@ public class MainWindow {
         board = new GuiSquare[boardHeight][boardWidth];
     }
 
-    public void init(BoardI board) {
+    public void init(UserInteractionObserver obs, BoardI board) {
         createFrame();
-        createComponents(board);
+        createComponents(obs, board);
         addComponentsToFrame();
     }
 
@@ -53,19 +53,19 @@ public class MainWindow {
         frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
     }
 
-    protected void createComponents(BoardI boardModel) {
-        createBoardArea(boardModel);
+    protected void createComponents(UserInteractionObserver obs, BoardI boardModel) {
+        createBoardArea(obs, boardModel);
         createStatsArea();
     }
 
-    protected void createBoardArea(BoardI boardModel) {
+    protected void createBoardArea(UserInteractionObserver obs, BoardI boardModel) {
         boardArea = new JPanel(new GridLayout(boardModel.getHeight() + 1, boardModel.getWidth() + 1));
         for (int i = 0; i < boardModel.getHeight() + 1; i++) {
             for (int j = 0; j < boardModel.getWidth() + 1; j++) {
                 if ((i == 0 || j == 0)) {
                     addCoordLabel(j, i, boardArea);
                 } else {
-                    addGuiSquare(boardModel, j - 1, i - 1);
+                    addGuiSquare(obs, boardModel, j - 1, i - 1);
                 }
             }
         }
@@ -83,10 +83,10 @@ public class MainWindow {
         container.add(label);
     }
 
-    private void addGuiSquare(BoardI boardModel, int x, int y) {
+    private void addGuiSquare(UserInteractionObserver obs, BoardI boardModel, int x, int y) {
         GuiSquare square = null;
         try {
-            square = new GuiSquare(boardModel.getSquareAt(x, y));
+            square = new GuiSquare(obs, boardModel.getSquareAt(x, y));
             //panel.add(new JLabel("(" + j + ", " + i + ")"));
         } catch (IOException ex) {
             Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, "Check the path for "

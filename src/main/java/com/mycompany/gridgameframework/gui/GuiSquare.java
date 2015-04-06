@@ -7,6 +7,7 @@ package com.mycompany.gridgameframework.gui;
 
 import com.mycompany.gridgameframework.BoardComponent;
 import com.mycompany.gridgameframework.Square;
+import com.mycompany.gridgameframework.UserInteractionObserver;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
@@ -26,11 +27,11 @@ public class GuiSquare<E> extends Square<E> {
     private JLabel label;
     private InputBox txt;
 
-    public GuiSquare(BoardComponent component) throws IOException {
+    public GuiSquare(UserInteractionObserver obs, BoardComponent component) throws IOException {
         super(component.getX(), component.getY());
         createContentPanel();
 
-        setLabelOrTextField(component);
+        setLabelOrTextField(obs, component);
         panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
     }
     
@@ -38,9 +39,9 @@ public class GuiSquare<E> extends Square<E> {
         this.panel = new JPanel(new BorderLayout());
     }
 
-    protected void setLabelOrTextField(BoardComponent component) {
+    protected void setLabelOrTextField(UserInteractionObserver obs, BoardComponent component) {
         if (component.getHint() == null) {
-            panel.add(new InputBox(1 , component.getX(), component.getY(), component.getContent()).getTextField());
+            panel.add(new InputBox(obs, 1 , component.getX(), component.getY(), component.getContent()).getTextField());
             return;
         }
         if (component.getHint() instanceof BufferedImage) {
