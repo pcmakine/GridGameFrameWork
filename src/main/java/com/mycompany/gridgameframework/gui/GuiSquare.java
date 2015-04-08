@@ -12,8 +12,10 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -21,45 +23,54 @@ import javax.swing.JPanel;
  *
  * @author Pete
  */
-public class GuiSquare<E> extends Square<E> {
+public class GuiSquare<E> {
 
-    private JPanel panel;
-    private JLabel label;
-    private InputBox txt;
+    private JPanel contentPanel;
+    private JLabel hintLabel;
+    private InputBox contentText;
 
     public GuiSquare(UserInteractionObserver obs, BoardComponent component) throws IOException {
-        super(component.getX(), component.getY());
-        createContentPanel();
-
-        setLabelOrTextField(obs, component);
-        panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        this.contentPanel = new JPanel(new BorderLayout());
+        createLabelOrInputBox(obs, component);
+        contentPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
     }
     
-    protected void createContentPanel(){
-        this.panel = new JPanel(new BorderLayout());
+    protected void setContentPanelProperties(){
+        this.contentPanel = new JPanel(new BorderLayout());
     }
 
-    protected void setLabelOrTextField(UserInteractionObserver obs, BoardComponent component) {
+    private void createLabelOrInputBox(UserInteractionObserver obs, BoardComponent component) {
         if (component.getHint() == null) {
-            panel.add(new InputBox(obs, 1 , component.getX(), component.getY(), component.getContent()).getTextField());
+            contentPanel.add(new InputBox(obs, 1 , component.getX(), component.getY(), component.getContent()).getInputField());
             return;
         }
         if (component.getHint() instanceof BufferedImage) {
-            this.label = new JLabel(new ImageIcon((BufferedImage) component.getHint()));
+            this.hintLabel = new JLabel(new ImageIcon((BufferedImage) component.getHint()));
         } else if (component.getHint() instanceof Integer || component.getHint() instanceof String) {
-            this.label = new JLabel("Hint: " + component.getHint());
+            this.hintLabel = new JLabel("Hint: " + component.getHint());
         } else if (component.getHint() != null) {
             throw new IllegalStateException("Board component's hint must be instance of "
                     + "Integer, String or BufferedImage");
         }
-        if (label != null) {
-            panel.add(label);
+        if (hintLabel != null) {
+            contentPanel.add(hintLabel);
         }
     }
     
-    
-
-    public JPanel getPanel() {
-        return panel;
+    protected void addComponents(){
+        addComponent(hintLabel);
+        addComponent(contentText.getInputField());
     }
+    
+    private void addComponent(JComponent component){
+        if(component != null){
+            contentPanel.add(hintLabel);
+        }
+    }
+
+    public JPanel getContentPanel() {
+        return contentPanel;
+    }
+
+
 }

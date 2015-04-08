@@ -28,29 +28,29 @@ import javax.swing.SwingConstants;
  */
 public class MainWindow {
 
-    protected JFrame frame;
+    protected JFrame mainFrame;
     protected JPanel boardArea;
     protected JPanel statsArea;
     protected JLabel timeLabel;
     protected GuiSquare[][] board;
 
     public MainWindow(int boardWidth, int boardHeight) {
+        mainFrame = new JFrame();
         board = new GuiSquare[boardHeight][boardWidth];
     }
 
     public void init(UserInteractionObserver obs, BoardI board) {
-        createFrame();
+        setFrameProperties();
         createComponents(obs, board);
         addComponentsToFrame();
     }
 
-    protected void createFrame() {
-        frame = new JFrame();
-        frame.getContentPane().setLayout(new BorderLayout());
-        frame.setTitle("Easy Grid Game");
-        frame.setSize(500, 500);
-        frame.setLocationRelativeTo(null);
-        frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+    protected void setFrameProperties() {
+        mainFrame.getContentPane().setLayout(new BorderLayout());
+        mainFrame.setTitle("Easy Grid Game");
+        mainFrame.setSize(500, 500);
+        mainFrame.setLocationRelativeTo(null);
+        mainFrame.setDefaultCloseOperation(mainFrame.EXIT_ON_CLOSE);
     }
 
     protected void createComponents(UserInteractionObserver obs, BoardI boardModel) {
@@ -96,7 +96,7 @@ public class MainWindow {
             System.exit(1);
         }
         board[y][x] = square;
-        boardArea.add(square.getPanel());
+        boardArea.add(square.getContentPanel());
     }
     
     private void createStatsArea(){
@@ -110,10 +110,10 @@ public class MainWindow {
     }
 
     protected void addComponentsToFrame() {
-        frame.add(boardArea, BorderLayout.CENTER);
-        frame.add(statsArea, BorderLayout.SOUTH);
-        frame.setVisible(true);
-        frame.pack();
+        mainFrame.add(boardArea, BorderLayout.CENTER);
+        mainFrame.add(statsArea, BorderLayout.SOUTH);
+        mainFrame.setVisible(true);
+        mainFrame.pack();
     }
     
     public void updateTimeLabel(long seconds){

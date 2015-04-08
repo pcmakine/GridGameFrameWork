@@ -26,7 +26,7 @@ import javax.swing.text.PlainDocument;
  */
 public class InputBox {
 
-    private static Font font = new Font("Courier", Font.BOLD, 15);
+    private static Font DEFAULT_FONT = new Font("Courier", Font.BOLD, 15);
     protected JTextField inputField;
     protected final int limit;
 
@@ -47,25 +47,33 @@ public class InputBox {
         inputField.setText(initialContent);
     }
 
-    protected void setActionListener(final UserInteractionObserver obs, final int x, final int y) {
+    private void setActionListener(final UserInteractionObserver obs, final int x, final int y) {
         inputField.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!obs.onUserInput(x, y, e.getActionCommand())) {
-                    inputField.setBorder(BorderFactory.createLineBorder(Color.RED, 3));
+                    setInputFieldAppearanceOnInvalidInput();
+                }else{
+                    setInputFieldAppearanceOnValidInput();
                 }
             }
         });
     }
+    
+    protected void setInputFieldAppearanceOnInvalidInput(){
+        inputField.setBorder(BorderFactory.createLineBorder(Color.RED, 3));
+    }
+    
+    protected void setInputFieldAppearanceOnValidInput(){ };
 
     protected void setInputFieldProperties() {
         inputField.setVisible(true);
         inputField.setPreferredSize(new Dimension(40, 40));
         inputField.setHorizontalAlignment(JTextField.CENTER);
-        inputField.setFont(font);
+        inputField.setFont(DEFAULT_FONT);
     }
 
-    public JTextField getTextField() {
+    public JTextField getInputField() {
         return inputField;
     }
 }
