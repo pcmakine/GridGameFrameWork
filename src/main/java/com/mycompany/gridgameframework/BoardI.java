@@ -11,16 +11,16 @@ package com.mycompany.gridgameframework;
  */
 public interface BoardI {
 
-    int getHeight();
+    public int getWidth();
+    
+    public int getHeight();
 
-    BoardComponent getSquareAt(int x, int y) throws IllegalArgumentException;
+    public BoardComponent getSquareAt(int x, int y) throws IllegalArgumentException;
 
-    BoardComponent[][] getSquares();
+    public BoardComponent[][] getSquares();
 
-    int getWidth();
+    public boolean isFilled();
 
-    boolean isFilled();
-
-    boolean setUserInputAt(int x, int y, String input);
+    public boolean setUserInputAt(int x, int y, String input);
     
 }

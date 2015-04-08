@@ -15,8 +15,8 @@ import java.util.Observer;
  */
 public class GameController implements UserInteractionObserver {
 
-    private Game game;
-    private final MainWindow gui;
+    protected Game game;
+    protected final MainWindow gui;
 
     public GameController() {
         this.game = new Game();

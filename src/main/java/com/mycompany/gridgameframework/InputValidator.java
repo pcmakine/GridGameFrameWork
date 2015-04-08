@@ -16,7 +16,7 @@ public abstract class InputValidator {
 
     public boolean validateInput(Square square, String input) {
         List<String> errors = isValid(square, input);
-        square.setError(errors);
+        square.setErrors(errors);
         
         return errors.isEmpty();
     }

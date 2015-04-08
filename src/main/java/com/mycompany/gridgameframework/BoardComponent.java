@@ -13,20 +13,21 @@ import java.util.List;
  */
 public interface BoardComponent<E> {
 
-    String getContent();
-
-    List<String> getErrors();
-
-    E getHint();
-
-    int getNumOfChanges();
-
-    int getX();
-
-    int getY();
-
-    boolean setContent(String content);
-
-    void setHint(E hint);
+    public String getContent();
     
+    public boolean setContent(String content);
+
+    public List<String> getErrors();
+    
+    public void setErrors(List<String> errors);
+
+    public E getHint();
+    
+    public void setHint(E hint);
+
+    public int getNumOfChanges();
+
+    public int getX();
+
+    public int getY();
 }

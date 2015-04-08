@@ -1,0 +1,586 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.2">
+  <zoom_level>6</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>354</x>
+      <y>402</y>
+      <w>252</w>
+      <h>162</h>
+    </coordinates>
+    <panel_attributes>	Game
+--
++&lt;&lt;constructor&gt;&gt; Game()
++isStarted(): boolean
++startGame(): void
++isPaused(): boolean
++pauseGame(): void
++resumeGame(): void
++newTurn(): void
++isGameOver: boolean
++endGame(): void
++setName(name: String): boolean
++getName(): String
++getBoard(): BoardI
++getStats(): GameStats
++setStats(stats: GameStats): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>42</x>
+      <y>642</y>
+      <w>198</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>Board
+--
+_+DEFAULT_WIDTH: int_
+_+DEFAULT_HEIGHT: int_
+_+MAX_WIDTH: int_
+_+MAX_HEIGHT: int_
+_+MIN_WIDTH: int_
+_+MIN_HEIGHT: int_
+--
++ &lt;&lt;constructor&gt;&gt; Board(width: int, height: int)
++toString(): String
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>234</x>
+      <y>534</y>
+      <w>132</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>10.0;10.0;200.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>306</x>
+      <y>630</y>
+      <w>162</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+BoardComponent&lt;E&gt;
+--
++getContent(): String
++setContent(content: String): boolean
++getErrors(): List
++setErrors(errors: List): void
++getHint(): E
++setHint(hint: E): void
++getNumOfChanges(): int
++getX(): int
++getY(): int
+
+
+
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>72</x>
+      <y>396</y>
+      <w>210</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;abstract class&gt;&gt;
+Rule
+--
++check(game: Game, inputValid: boolean): boolean
++onSuccessfullCheck(game: Game): void
++onUnSuccessfullCheck(game: Game): void
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>276</x>
+      <y>414</y>
+      <w>90</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m2=1
+m1=2..*</panel_attributes>
+    <additional_attributes>10.0;10.0;130.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>342</x>
+      <y>246</y>
+      <w>324</w>
+      <h>114</h>
+    </coordinates>
+    <panel_attributes>GameStats
+--
+#gameTime: long
+#sessionStartTime: Date
+#endTime: Date
+#playedTurns: int
+#pointsCalc: PointsCalculator
+#timerExecutor: ScheduledExecutorService
+#timerTask: Future
+--
++&lt;&lt;constructor&gt;&gt;GameStats(startTime: Date, pointsCalc: PointsCalculator): GameStats
+#startScheduledUpdates: void
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>462</x>
+      <y>354</y>
+      <w>18</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>708</x>
+      <y>642</y>
+      <w>204</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;abstract class&gt;&gt;
+InputValidator
+--
++validateInput(square: Square, input: String): boolean
+#isValid(square: Square, input: String): List&lt;String&gt;
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>234</x>
+      <y>654</y>
+      <w>84</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1
+m2=4..900
+</panel_attributes>
+    <additional_attributes>10.0;20.0;120.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>642</x>
+      <y>594</y>
+      <w>36</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;use&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>672</x>
+      <y>144</y>
+      <w>186</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+UserInteractionObserver
+--
++onUserInput(x: int, y: int, input: String): boolean
++onPauseClick(): void
++onResumeClick(): void
++onSaveGameClick(): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>756</x>
+      <y>204</y>
+      <w>18</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>618</x>
+      <y>552</y>
+      <w>156</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>ValidatorService
+--
+_+getService(): ValidatorService()_
++getValidator(): InputValidator
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>720</x>
+      <y>594</y>
+      <w>18</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>84</x>
+      <y>456</y>
+      <w>96</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>140.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>72</x>
+      <y>480</y>
+      <w>96</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>DefaultTurnChangeRule
+--
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>102</x>
+      <y>210</y>
+      <w>162</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+PointsCalculator
+--
++calculatePoints(stats: GameStats): int
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>258</x>
+      <y>246</y>
+      <w>96</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>10.0;10.0;140.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>174</x>
+      <y>480</y>
+      <w>108</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>DefaultEndGameRule
+--
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>156</x>
+      <y>456</y>
+      <w>96</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;140.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>528</x>
+      <y>636</y>
+      <w>162</w>
+      <h>114</h>
+    </coordinates>
+    <panel_attributes>Square&lt;E&gt;
+--
++&lt;&lt;constructor&gt;&gt; Square(x: int, y: int)
++getContent(): String
++setContent(content: String): boolean
++getNumOfChanges(): int
++getImagePath(): String
++setImagePath(imagePath: String): void
+#getX(): int
+#getY(): int
+#setError(): void
+
+
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>462</x>
+      <y>660</y>
+      <w>78</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;110.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>678</x>
+      <y>246</y>
+      <w>186</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>GameController
+--
+#game: Game
+#gui: MainWindow
+--
++&lt;&lt;constructor&gt;&gt; GameController()
++getGame(): Game
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>36</x>
+      <y>528</y>
+      <w>204</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>BoardI
+--
++getWidht(): int
++getHeight(): int
++getSquareAt(x: int, y: int): BoardComponent
++getSquares(): BoardComponent[][]
++isFilled(): boolean
++setUserInputAt(x: int, y: int, input: String): boolean
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>126</x>
+      <y>606</y>
+      <w>18</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>252</x>
+      <y>54</y>
+      <w>150</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Interface&gt;&gt;
+GameStatsI
+--
++calculatePoints() :int
++pauseGame(): void
++resumeGame(): void
++endGame(endTime :Date): void
+#updateGameTime(): void
++sessionDuration(): long
++startNextTurn(): void
++getGameTimeInSeconds(): long
++getEndTime() :Date
++getStartTime(): TimeStamp
++getPlayedTurns(): int
++setPlayedTurns(turns: int): void
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>342</x>
+      <y>192</y>
+      <w>18</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>600</x>
+      <y>312</y>
+      <w>96</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>10.0;170.0;140.0;170.0;140.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>672</x>
+      <y>54</y>
+      <w>186</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+Observer
+--
++update(o: Observable, arg: Object): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>756</x>
+      <y>114</y>
+      <w>18</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>414</x>
+      <y>54</y>
+      <w>186</w>
+      <h>114</h>
+    </coordinates>
+    <panel_attributes>Observable
+--
++addObserver(o: Observer): void
+#clearChanged(): void
++countObservers(): int
++deleteObserver(o: Observer): void
++deleteObservers(): void
++hasChanged(): boolean
++notifyObservers(): void
++notifyObservers(arg: Object): void
+#setChanged(): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>540</x>
+      <y>162</y>
+      <w>18</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>612</x>
+      <y>78</y>
+      <w>72</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>100.0;10.0;10.0;10.0;10.0;280.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>102</x>
+      <y>282</y>
+      <w>162</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+GameSaver
+--
++saveGame(Game game): boolean
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>258</x>
+      <y>300</y>
+      <w>108</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>10.0;10.0;70.0;10.0;70.0;180.0;160.0;180.0</additional_attributes>
+  </element>
+</diagram>

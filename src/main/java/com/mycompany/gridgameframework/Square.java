@@ -74,7 +74,7 @@ public class Square<E> implements BoardComponent<E> {
         return errors;
     }
 
-    protected void setError(List<String> errors) {
+    public void setErrors(List<String> errors) {
         this.errors = errors;
     }
   
