@@ -25,9 +25,9 @@ import javax.swing.JPanel;
  */
 public class GuiSquare<E> {
 
-    private JPanel contentPanel;
-    private JLabel hintLabel;
-    private InputBox contentText;
+    protected JPanel contentPanel;
+    protected JLabel hintLabel;
+    protected InputBox contentText;
 
     public GuiSquare(UserInteractionObserver obs, BoardComponent component) throws IOException {
         this.contentPanel = new JPanel(new BorderLayout());
