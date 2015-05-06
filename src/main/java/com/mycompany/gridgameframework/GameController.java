@@ -33,7 +33,13 @@ public class GameController implements UserInteractionObserver {
 
     @Override
     public boolean onUserInput(int x, int y, String input) {
-        return game.onUserInput(x, y, input);
+        boolean valid = game.onUserInput(x, y, input);
+        
+        if(game.isGameOver()){
+            
+        }
+        
+        return valid;
     }
 
     @Override
@@ -57,11 +63,11 @@ public class GameController implements UserInteractionObserver {
 
     @Override
     public void update(Observable o, final Object arg) {
-        final GameStatsI stats = (GameStatsI) o;
+        final GameStats stats = (GameStats) o;
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                gui.updateTimeLabel(stats.getGameTimeInSeconds());
+                gui.updateStatsArea(stats);
             }
         });
     }

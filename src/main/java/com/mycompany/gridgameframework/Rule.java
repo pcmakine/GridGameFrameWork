@@ -9,9 +9,8 @@ package com.mycompany.gridgameframework;
  *
  * @author Pete
  */
-public abstract class Rule {
-    public abstract boolean check(Game game, boolean inputValid);
-    public abstract void onSuccessfullCheck(Game game);
-    public abstract void onUnSuccessfullCheck(Game game);
-    
+public interface Rule {
+    public boolean check(Game game, boolean inputValid);
+    public void onSuccessfullCheck(Game game);
+    public void onUnSuccessfullCheck(Game game);
 }

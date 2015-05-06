@@ -9,7 +9,7 @@ package com.mycompany.gridgameframework;
  *
  * @author Pete
  */
-public class DefaultEndGameRule extends Rule{
+public class DefaultEndGameRule implements Rule{
 
     @Override
     public boolean check(Game game, boolean inputValid) {
@@ -18,7 +18,7 @@ public class DefaultEndGameRule extends Rule{
 
     @Override
     public void onSuccessfullCheck(Game game) {
-        game.endGame();
+        game.endGame(true);
     }
 
     @Override

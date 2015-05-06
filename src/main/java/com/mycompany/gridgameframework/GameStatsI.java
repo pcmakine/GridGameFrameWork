@@ -6,6 +6,7 @@
 package com.mycompany.gridgameframework;
 
 import java.util.Date;
+import java.util.Observable;
 
 /**
  *
@@ -15,7 +16,7 @@ public interface GameStatsI {
 
     int calculatePoints();
 
-    void endGame(Date endTime);
+    void endGame(Date endTime, boolean PlayerWon);
 
     Date getEndTime();
 

@@ -62,8 +62,8 @@ public class Game {
         return gameOver;
     }
 
-    public void endGame() {
-        stats.endGame(new Date());
+    public void endGame(boolean playerWon) {
+        stats.endGame(new Date(), playerWon);
         gameOver = true;
     }
 

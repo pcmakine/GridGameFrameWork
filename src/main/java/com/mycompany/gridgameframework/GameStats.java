@@ -27,17 +27,23 @@ public class GameStats extends Observable implements GameStatsI {
     protected PointsCalculator pointsCalc;
     protected ScheduledExecutorService timerExecutor;
     protected Future timerTask;
+    protected int points;
+    protected boolean playerWon;
+    protected boolean playerLost;
 
     public GameStats(PointsCalculator pointsCalc) {
         this.pointsCalc = pointsCalc;
+        this.playerWon = false;
+        this.playerLost = false;
     }
 
     @Override
     public int calculatePoints() {
         if (pointsCalc != null) {
-            return pointsCalc.calculatePoints(this);
+            this.points = pointsCalc.calculatePoints(this);
+            return points;
         }
-        return 0;
+        return -1;
     }
 
     @Override
@@ -61,12 +67,17 @@ public class GameStats extends Observable implements GameStatsI {
     }
 
     @Override
-    public void endGame(Date endTime) {
+    public void endGame(Date endTime, boolean playerWon) {
         this.endTime = endTime;
         updateGameTime();
         sessionStartTime = null;
         timerTask.cancel(true);
         timerExecutor.shutdown();
+        this.calculatePoints();
+        this.playerWon = playerWon;
+        this.playerLost = !playerWon;
+        setChanged();
+        notifyObservers(getGameTimeInSeconds());
     }
 
     protected void updateGameTime() {

@@ -9,7 +9,7 @@ package com.mycompany.gridgameframework;
  *
  * @author Pete
  */
-public class DefaultTurnChangeRule extends Rule{
+public class DefaultTurnChangeRule implements Rule{
 
     @Override
     public boolean check(Game game, boolean inputValid) {

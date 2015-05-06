@@ -8,6 +8,7 @@ package com.mycompany.gridgameframework.gui;
 import com.mycompany.gridgameframework.BoardI;
 import com.mycompany.gridgameframework.Game;
 import com.mycompany.gridgameframework.GameController;
+import com.mycompany.gridgameframework.GameStatsI;
 import com.mycompany.gridgameframework.UserInteractionObserver;
 import java.awt.BorderLayout;
 import java.awt.ComponentOrientation;
@@ -116,12 +117,11 @@ public class MainWindow {
         mainFrame.pack();
     }
     
-    public void updateTimeLabel(long seconds){
+    public void updateStatsArea(GameStatsI stats){
         if(timeLabel != null){
-            this.timeLabel.setText("Elapsed time: " + seconds);
+            this.timeLabel.setText("Elapsed time: " + stats.getGameTimeInSeconds());
             timeLabel.updateUI();
         }
-        
         
     }
 }
