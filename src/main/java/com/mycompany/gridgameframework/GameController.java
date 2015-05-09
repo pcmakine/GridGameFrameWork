@@ -19,7 +19,7 @@ public class GameController implements UserInteractionObserver {
     protected final MainWindow gui;
 
     public GameController() {
-        this.game = new Game();
+        this.game = Game.getGame();
         game.getStats().addObserver(this);
 
         gui = new MainWindow(game.getBoard().getWidth(), game.getBoard().getHeight());

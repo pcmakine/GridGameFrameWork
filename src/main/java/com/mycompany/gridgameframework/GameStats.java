@@ -103,7 +103,7 @@ public class GameStats extends Observable implements GameStatsI {
     }
 
     @Override
-    public void startNextTurn() {
+    public void endTurn() {
         playedTurns++;
     }
 

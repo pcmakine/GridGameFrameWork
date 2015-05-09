@@ -40,6 +40,7 @@ public class Square<E> implements BoardComponent<E> {
         }
         if(valid){
             this.content = content;
+            numOfChanges++;
         }
         return valid;
     }

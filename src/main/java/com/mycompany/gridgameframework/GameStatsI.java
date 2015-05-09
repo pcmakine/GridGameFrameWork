@@ -36,6 +36,6 @@ public interface GameStatsI {
 
     void startGame(Date startTime);
 
-    void startNextTurn();
+    void endTurn();
     
 }

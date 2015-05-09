@@ -11,11 +11,16 @@ import com.mycompany.gridgameframework.GameController;
 import com.mycompany.gridgameframework.GameStatsI;
 import com.mycompany.gridgameframework.UserInteractionObserver;
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.ComponentOrientation;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.LayoutManager;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -33,6 +38,7 @@ public class MainWindow {
     protected JPanel boardArea;
     protected JPanel statsArea;
     protected JLabel timeLabel;
+    protected Map<String, Component> customComponents;
     protected GuiSquare[][] board;
 
     public MainWindow(int boardWidth, int boardHeight) {
@@ -57,6 +63,11 @@ public class MainWindow {
     protected void createComponents(UserInteractionObserver obs, BoardI boardModel) {
         createBoardArea(obs, boardModel);
         createStatsArea();
+        this.customComponents = createCustomComponents(obs, boardModel);
+    }
+    
+    protected Map<String, Component> createCustomComponents(UserInteractionObserver obs, BoardI boardModel){
+        return new HashMap();
     }
 
     protected void createBoardArea(UserInteractionObserver obs, BoardI boardModel) {
@@ -100,7 +111,7 @@ public class MainWindow {
         boardArea.add(square.getContentPanel());
     }
     
-    private void createStatsArea(){
+    private Component createStatsArea(){
         statsArea = new JPanel(new BorderLayout());
         JLabel statsLabel = new JLabel("Stats");
         statsLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -108,13 +119,19 @@ public class MainWindow {
         timeLabel = new JLabel("Elapsed time: 0");
         timeLabel.setHorizontalAlignment(SwingConstants.CENTER);
         statsArea.add(timeLabel, BorderLayout.CENTER);
+        return statsArea;
     }
 
     protected void addComponentsToFrame() {
         mainFrame.add(boardArea, BorderLayout.CENTER);
         mainFrame.add(statsArea, BorderLayout.SOUTH);
+        addCustomComponentsToFrame();
         mainFrame.setVisible(true);
         mainFrame.pack();
+    }
+    
+    protected void addCustomComponentsToFrame(){
+        
     }
     
     public void updateStatsArea(GameStatsI stats){

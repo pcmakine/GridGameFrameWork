@@ -22,7 +22,7 @@ public class DefaultTurnChangeRule implements Rule{
 
     @Override
     public void onSuccessfullCheck(Game game) {
-        game.newTurn();
+        game.endTurn();
     }
 
     @Override

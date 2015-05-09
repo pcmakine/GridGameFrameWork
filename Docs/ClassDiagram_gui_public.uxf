@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.2">
+  <help_text>
+// Uncomment the following line to change the fontsize and font:
+// fontsize=14
+// fontfamily=SansSerif //possible: SansSerif,Serif,Monospaced
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// Welcome to UMLet!
+//
+// Double-click on elements to add them to the diagram, or to copy them
+// Edit elements by modifying the text in this panel
+// Hold Ctrl to select multiple elements
+// Use Ctrl+mouse to select via lasso
+//
+// Use +/- or Ctrl+mouse wheel to zoom
+// Drag a whole relation at its central square icon
+//
+// Press Ctrl+C to copy the whole diagram to the system clipboard (then just paste it to, eg, Word)
+// Edit the files in the "palettes" directory to create your own element palettes
+//
+// Select "Custom Elements &gt; New..." to create new element types
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// This text will be stored with each diagram;  use it for notes.</help_text>
+  <zoom_level>6</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>18</x>
+      <y>276</y>
+      <w>252</w>
+      <h>162</h>
+    </coordinates>
+    <panel_attributes>	Game
+--
++&lt;&lt;constructor&gt;&gt; Game()
++isStarted(): boolean
++startGame(): void
++isPaused(): boolean
++pauseGame(): void
++resumeGame(): void
++newTurn(): void
++isGameOver: boolean
++endGame(playerWon: boolean): void
++setName(name: String): boolean
++getName(): String
++getBoard(): BoardI
++getStats(): GameStatsI
++setStats(stats: GameStatsI): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>18</x>
+      <y>0</y>
+      <w>324</w>
+      <h>234</h>
+    </coordinates>
+    <panel_attributes>GameStats
+--
+#gameTime: long
+#sessionStartTime: Date
+#endTime: Date
+#playedTurns: int
+#pointsCalc: PointsCalculator
+#timerExecutor: ScheduledExecutorService
+#timerTask: Future
+#points: int
+--
++&lt;&lt;constructor&gt;&gt;GameStats(startTime: Date, pointsCalc: PointsCalculator): GameStats
+#startScheduledUpdates: void
++calculatePoints() :int
++pauseGame(): void
++resumeGame(): void
++endGame(endTime :Date, playerWon: boolean): void
+#updateGameTime(): void
++sessionDuration(): long
++startNextTurn(): void
++getGameTimeInSeconds(): long
++getEndTime() :Date
++getStartTime(): TimeStamp
++getPlayedTurns(): int
++setPlayedTurns(turns: int): void
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>126</x>
+      <y>228</y>
+      <w>18</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>390</x>
+      <y>180</y>
+      <w>186</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+UserInteractionObserver
+--
++onUserInput(x: int, y: int, input: String): boolean
++onPauseClick(): void
++onResumeClick(): void
++onSaveGameClick(): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>474</x>
+      <y>240</y>
+      <w>18</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>594</x>
+      <y>144</y>
+      <w>162</w>
+      <h>114</h>
+    </coordinates>
+    <panel_attributes>Square&lt;E&gt;
+--
++&lt;&lt;constructor&gt;&gt; Square(x: int, y: int)
++getContent(): String
++setContent(content: String): boolean
++getNumOfChanges(): int
+#getX(): int
+#getY(): int
+#setError(): void
+
+
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>390</x>
+      <y>276</y>
+      <w>186</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>GameController
+--
+#game: Game
+#gui: MainWindow
+--
++&lt;&lt;constructor&gt;&gt; GameController()
++getGame(): Game
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>264</x>
+      <y>288</y>
+      <w>138</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>10.0;10.0;210.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>390</x>
+      <y>30</y>
+      <w>186</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+Observer
+--
++update(o: Observable, arg: Object): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>474</x>
+      <y>90</y>
+      <w>18</w>
+      <h>102</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;150.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>336</x>
+      <y>54</y>
+      <w>66</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>90.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>324</x>
+      <y>414</y>
+      <w>306</w>
+      <h>162</h>
+    </coordinates>
+    <panel_attributes>MainWindow
+--
+#mainFrame: JFrame
+#boardArea: JPanel
+#statsArea: JPanel
+#timeLabel: JLabel
+#customComponents: Map&lt;String, Component&gt;
+#board[][]: GuiSquare
+--
++&lt;&lt;constructor&gt;&gt; MainWindow(int boardWidth, int boardHeight)
+#createFrame(): void
+#createComponents(obs: UserInteractionObserver, boardModel: BoardI): void
+#createCustomComponents(): void
+#createBoardArea(boardModel: BoardI): void
+#addComponentsToFrame(): void
+#addCustomComponentsToFrame(): void
++updateStatsArea(stats: GameStatsI): void
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>468</x>
+      <y>342</y>
+      <w>18</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>10.0;120.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>702</x>
+      <y>414</y>
+      <w>348</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>GuiSquare
+--
+#contentPanel: JPanel
+#hintLabel: JLabel
+#contentText: InputBox
+--
++&lt;&lt;constructor&gt;&gt; GuiSquare(obs: UserInteractionObserver, modelSquare: BoardComponent)
+#setContentPanelProperties()
+#addComponents(): void
++getContentPanel(): JPanel
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>624</x>
+      <y>444</y>
+      <w>90</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m2=1
+m1=4..900</panel_attributes>
+    <additional_attributes>130.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>594</x>
+      <y>276</y>
+      <w>372</w>
+      <h>102</h>
+    </coordinates>
+    <panel_attributes>InputBox
+--
+#inputField: JTextField
+#limit: int
+--
++&lt;&lt;constructor&gt;&gt; InputBox(obs: UserInteractionObserver, limit: int, x: int, y: int, initialContent: String)
+#setActionListener(obs: UserInteractionObserver, x: int, y: int): void
+#setInputFieldAppearanceOnInvalidInput(): void
+#setInputFieldAppearanceOnValidInput(): void
+#setInputFieldProperties(): void
++getInputField(): JTextField
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>738</x>
+      <y>372</y>
+      <w>18</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>750</x>
+      <y>180</y>
+      <w>282</w>
+      <h>246</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;use&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;450.0;20.0;450.0;390.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>216</x>
+      <y>522</y>
+      <w>120</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;use&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;180.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>120</x>
+      <y>432</y>
+      <w>18</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>18</x>
+      <y>486</y>
+      <w>204</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>BoardI
+--
+#initContent(square: BoardComponent): void
++getWidht(): int
++getHeight(): int
++getSquareAt(x: int, y: int): BoardComponent
++getSquares(): BoardComponent[][]
++isFilled(): boolean
++setUserInputAt(x: int, y: int, input: String): boolean
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

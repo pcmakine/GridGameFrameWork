@@ -5,6 +5,7 @@
  */
 package com.mycompany.gridgameframework;
 
+import com.mycompany.gridgameframework.configs.ObjectCreator;
 import java.util.List;
 
 /**
@@ -39,16 +40,18 @@ public class Board implements BoardI {
     }
 
     private void init() {
+        ObjectCreator creator = new ObjectCreator();
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
-                Square square = new Square(x, y);
+                
+                BoardComponent square = creator.createBoardComponent(x, y);
                 initContent(square);
                 squares[y][x] = square;
             }
         }
     }
 
-    protected void initContent(Square square){};
+    protected void initContent(BoardComponent square){};
 
     @Override
     public BoardComponent[][] getSquares() {

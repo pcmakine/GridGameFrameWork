@@ -88,9 +88,9 @@ public class ObjectCreator {
         return rules;
     }
 
-    public Board createBoard() {
+    public BoardI createBoard() {
         try {
-            return (Board) getConstructor(properties.getProperty(Board.class.getSimpleName()), int.class, int.class).newInstance(ConfigLoader.getGridWidth(), ConfigLoader.getGridHeight());
+            return (BoardI) getConstructor(properties.getProperty(Board.class.getSimpleName()), int.class, int.class).newInstance(ConfigLoader.getGridWidth(), ConfigLoader.getGridHeight());
         } catch (Exception ex) {
             try {
                 return new Board(ConfigLoader.getGridWidth(), ConfigLoader.getGridHeight());

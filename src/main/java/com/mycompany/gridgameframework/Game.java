@@ -23,8 +23,16 @@ public class Game {
     private boolean paused;
     private boolean gameOver;
     private boolean started;
+    private static Game instance = null;
+    
+    public static Game getGame(){
+        if(instance == null){
+            instance = new Game();
+        }
+        return instance;
+    }
 
-    public Game() {
+    private Game() {
         ObjectCreator creator = new ObjectCreator();
         this.board = creator.createBoard();
         this.rules = creator.createRules();
@@ -54,8 +62,8 @@ public class Game {
         paused = false;
     }
 
-    public void newTurn() {
-        stats.startNextTurn();
+    public void endTurn() {
+        stats.endTurn();
     }
 
     public boolean isGameOver() {
